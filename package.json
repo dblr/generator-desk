@@ -1,10 +1,10 @@
 {
-  "name": "generator-webapp",
-  "version": "3.0.0",
-  "description": "Scaffold out a front-end web app",
+  "name": "generator-desk",
+  "version": "0.1.0",
+  "description": "Scaffold out a Desk.com support portal theme or widget",
   "license": "BSD-2-Clause",
-  "repository": "yeoman/generator-webapp",
-  "author": "The Yeoman Team",
+  "repository": "dblr/generator-desk",
+  "author": "Desk.com",
   "main": "app/index.js",
   "engines": {
     "node": ">=4"
@@ -17,6 +17,10 @@
   ],
   "keywords": [
     "yeoman-generator",
+    "desk.com",
+    "desk support",
+    "desk theme",
+    "desk widget",
     "web",
     "app",
     "front-end",
