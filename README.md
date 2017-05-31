@@ -1,13 +1,12 @@
-# Web app generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-webapp.svg?branch=master)](http://travis-ci.org/yeoman/generator-webapp) [![Gitter](https://img.shields.io/badge/Gitter-Join_the_Yeoman_chat_%E2%86%92-00d06f.svg)](https://gitter.im/yeoman/yeoman)
+# Desk.com Theme Generator
 
-> [Yeoman](http://yeoman.io) generator that scaffolds out a front-end web app using [gulp](http://gulpjs.com/) for the build process
+> [Desk.com](http://desk.com) generator that builds out Desk themes locally using Gulp. Originally forked from [Gulp Webapp](https://github.com/yeoman/generator-webap) by the [Yeoman Team](http://yeoman.io/)
 
-![](screenshot.png)
+![](logo.png)
 
 
 ## Features
 
-Please see our [gulpfile](app/templates/gulpfile.js) for up to date information on what we support.
 
 * enable [ES2015 features](https://babeljs.io/docs/learn-es2015/) using [Babel](https://babeljs.io)
 * CSS Autoprefixing
@@ -20,6 +19,8 @@ Please see our [gulpfile](app/templates/gulpfile.js) for up to date information 
 
 *For more information on what this generator can do for you, take a look at the [gulp plugins](app/templates/_package.json) used in our `package.json`.*
 
+## Liquid
+Generator uses [gulp-liquify](https://github.com/fchasen/gulp-liquify) to render liquid during the `serve` process. It's built off of [tinyliquid](https://github.com/leizongmin/tinyliquid) and doesn't support 100% of liquid. However it now supports custom filters, which can be added or edited in the gulp file.
 
 ## libsass
 
@@ -30,16 +31,14 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
 
 ## Getting Started
 
-- Install: `npm install --global yo gulp-cli bower generator-webapp`
-- Run `yo webapp` to scaffold your webapp
+- Install dependencies: `npm install --global yo gulp-cli bower`
+- Install the generator: `npm install --global generator-desk`
+- Run `yo desk` to scaffold your Desk.com theme/widget
 - Run `gulp serve` to preview and watch for changes
-- Run `bower install --save <package>` to install frontend dependencies
-- Run `gulp serve:test` to run the tests in the browser
-- Run `gulp` to build your webapp for production
-- Run `gulp serve:dist` to preview the production build
+- Run `gulp desk` to prepare your theme for production
 
 
-## Docs
+## Docs (coming soon)
 
 * [getting started](docs/README.md) with this generator
 * [recipes](docs/recipes/README.md) for integrating other popular technologies like CoffeeScript
@@ -66,100 +65,6 @@ If your favorite feature is missing and you really need Ruby Sass, you can alway
 See the [contributing docs](contributing.md).
 
 
-## Sponsors
-Love Yeoman work and community? Help us keep it alive by donating funds to cover project expenses! <br />
-[[Become a sponsor](https://opencollective.com/yeoman#support)]
-
-  <a href="https://opencollective.com/yeoman/backers/0/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/0/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/1/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/1/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/2/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/2/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/3/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/3/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/4/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/4/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/5/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/5/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/6/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/6/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/7/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/7/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/8/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/8/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/9/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/9/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/10/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/10/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/11/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/11/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/12/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/12/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/13/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/13/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/14/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/14/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/15/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/15/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/16/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/16/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/17/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/17/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/18/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/18/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/19/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/19/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/20/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/20/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/21/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/21/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/22/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/22/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/23/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/23/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/24/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/24/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/25/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/25/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/26/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/26/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/27/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/27/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/28/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/28/avatar">
-  </a>
-  <a href="https://opencollective.com/yeoman/backers/29/website" target="_blank">
-    <img src="https://opencollective.com/yeoman/backers/29/avatar">
-  </a>
 
 
 ## License
