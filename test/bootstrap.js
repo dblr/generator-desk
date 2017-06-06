@@ -46,7 +46,7 @@ describe('Bootstrap feature', () => {
             'includeSass',
             'includeBootstrap'
           ],
-          legacyBootstrap: false
+          startingPoint: false
         })
         .on('end', done);
     });
@@ -73,7 +73,7 @@ describe('Bootstrap feature', () => {
           features: [
             'includeBootstrap'
           ],
-          legacyBootstrap: false
+          startingPoint: false
         })
         .on('end', done);
     });
@@ -101,7 +101,7 @@ describe('Bootstrap feature', () => {
             'includeSass',
             'includeBootstrap'
           ],
-          legacyBootstrap: true
+          startingPoint: true
         })
         .on('end', done);
     });
@@ -138,7 +138,7 @@ describe('Bootstrap feature', () => {
           features: [
             'includeBootstrap'
           ],
-          legacyBootstrap: true
+          startingPoint: true
         })
         .on('end', done);
     });

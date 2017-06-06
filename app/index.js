@@ -44,44 +44,35 @@ module.exports = class extends Generator {
 
   prompting() {
     if (!this.options['skip-welcome-message']) {
-      this.log(yosay('\'Allo \'allo! Out of the box I include HTML5 Boilerplate, jQuery, and a gulpfile to build your app.'));
+      this.log(yosay('Lets get going with Desk.com themes!'));
     }
 
     const prompts = [{
-      type: 'checkbox',
-      name: 'features',
-      message: 'Which additional features would you like to include?',
-      choices: [{
-        name: 'Sass',
-        value: 'includeSass',
-        checked: true
-      }, {
-        name: 'Bootstrap',
-        value: 'includeBootstrap',
-        checked: true
-      }, {
-        name: 'Modernizr',
-        value: 'includeModernizr',
-        checked: true
-      }]
-    }, {
+      type    : 'input',
+      name    : 'name',
+      message : 'Whats the project or company name??',
+      default : this.appname
+    },{
+      type    : 'input',
+      name    : 'urlpath',
+      message : 'Path to hosted site files (for site deployment)'
+    },{
       type: 'list',
-      name: 'legacyBootstrap',
+      name: 'startingPoint',
       message: 'Which version of Bootstrap would you like to include?',
       choices: [{
-        name: 'Bootstrap 3',
-        value: true
+        name: 'v5 - Respnsive Template (Desk default)',
+        value: 'v5'
       }, {
-        name: 'Bootstrap 4',
-        value: false
+        name: 'Foundation - Starting point based off Foundation v5.3 framework',
+        value: 'foundationFive'
+      }, {
+        name: 'Boot Strap 4 - Not yet available',
+        value: 'bootStrapFour'
+      },{
+        name: 'Foundation 6 - Not yet available',
+        value: 'foundationSix'
       }],
-      when: answers => answers.features.indexOf('includeBootstrap') !== -1
-    }, {
-      type: 'confirm',
-      name: 'includeJQuery',
-      message: 'Would you like to include jQuery?',
-      default: true,
-      when: answers => answers.features.indexOf('includeBootstrap') === -1
     }];
 
     return this.prompt(prompts).then(answers => {
@@ -90,12 +81,12 @@ module.exports = class extends Generator {
 
       // manually deal with the response, get back and store the results.
       // we change a bit this way of doing to automatically do this in the self.prompt() method.
-      this.includeSass = hasFeature('includeSass');
-      this.includeBootstrap = hasFeature('includeBootstrap');
-      this.includeModernizr = hasFeature('includeModernizr');
-      this.legacyBootstrap = answers.legacyBootstrap;
-      this.includeJQuery = answers.includeJQuery;
-
+      this.includeModernizr = true;
+      this.includeJQuery = true;
+      //this.includeBootstrap = hasFeature('includeBootstrap');
+      this.startingPoint = answers.startingPoint;
+      this.appname = answers.name;
+      this.urlpath = answers.urlpath;
     });
   }
 
@@ -121,9 +112,8 @@ module.exports = class extends Generator {
         date: (new Date).toISOString().split('T')[0],
         name: this.pkg.name,
         version: this.pkg.version,
-        includeSass: this.includeSass,
         includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap,
+        startingPoint: this.startingPoint,
         includeBabel: this.options['babel'],
         testFramework: this.options['test-framework']
       }
@@ -135,7 +125,6 @@ module.exports = class extends Generator {
       this.templatePath('_package.json'),
       this.destinationPath('package.json'),
       {
-        includeSass: this.includeSass,
         includeBabel: this.options['babel'],
         includeJQuery: this.includeJQuery,
       }
@@ -165,54 +154,56 @@ module.exports = class extends Generator {
       private: true,
       dependencies: {}
     };
+    // ALL versions
+    bowerJson.dependencies['jquery-validation'] = '^1.16.0';
+    bowerJson.dependencies['font-awesome'] = '~4.7';
+    bowerJson.dependencies['modernizr'] = '~2.8.1';
 
-    if (this.includeBootstrap) {
-
-      // Bootstrap 4
+    // v5 Responsive (bootstrap 3 based)
+    if (this.Startingpoint == 'v5') {
       bowerJson.dependencies = {
-        'bootstrap': '~4.0.0-alpha.6'
+        'bootstrap-sass': '~3.3.5'
       };
-
-      // Bootstrap 3
-      if (this.legacyBootstrap) {
-        if (this.includeSass) {
-          bowerJson.dependencies = {
-            'bootstrap-sass': '~3.3.5'
-          };
-          bowerJson.overrides = {
-            'bootstrap-sass': {
-              'main': [
-                'assets/stylesheets/_bootstrap.scss',
-                'assets/fonts/bootstrap/*',
-                'assets/javascripts/bootstrap.js'
-              ]
-            }
-          };
-        } else {
-          bowerJson.dependencies = {
-            'bootstrap': '~3.3.5'
-          };
-          bowerJson.overrides = {
-            'bootstrap': {
-              'main': [
-                'less/bootstrap.less',
-                'dist/css/bootstrap.css',
-                'dist/js/bootstrap.js',
-                'dist/fonts/*'
-              ]
-            }
-          };
+      bowerJson.overrides = {
+        'bootstrap-sass': {
+          'main': [
+            'assets/stylesheets/_bootstrap.scss',
+            'assets/fonts/bootstrap/*',
+            'assets/javascripts/bootstrap.js'
+          ]
         }
+      };
+    }
+    // Foundation startingPoint
+    if(this.startingPoint == 'foundationFive') {
+        bowerJson.dependencies = {
+          'foundation': '~5.5.3'
+        };
+    }
+    // Foundation 6 (not yet active)
+    if(this.startingPoint == 'foundationSix') {
+      bowerJson.dependencies = {
+        'foundation-sites': 'latest'
+      };
+    }
+    //Bootstrap 4 (not yet active)
+    if(this.startingPoint == 'bootStrapFour') {
+        bowerJson.dependencies = {
+          'bootstrap': '~4.0.0-alpha.6'
+        };
+    }
+    if (this.Startingpoint != 'bootStrapFour' || this.startingPoint != 'foundationSix') {
+      bowerJson.dependencies = {
+        'jquery': '~1.9.1'
       }
-
-    } else if (this.includeJQuery) {
-      bowerJson.dependencies['jquery'] = '~2.1.1';
+      bowerJson.resolutions = {
+        'jquery': '~1.9.1'
+      }
+    } else {
+      //Foundation 6/Bootstrap 4 Support (not yet active)
     }
 
-    if (this.includeModernizr) {
-      bowerJson.dependencies['modernizr'] = '~2.8.1';
-    }
-
+    // Write it down!
     this.fs.writeJSON('bower.json', bowerJson);
     this.fs.copy(
       this.templatePath('bowerrc'),
@@ -257,7 +248,7 @@ module.exports = class extends Generator {
       this.destinationPath('app/styles/' + css),
       {
         includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap
+        startingPoint: this.startingPoint
       }
     );
   }
@@ -292,7 +283,7 @@ module.exports = class extends Generator {
       ];
 
       // Bootstrap 3
-      if (this.legacyBootstrap) {
+      if (this.startingPoint) {
         if (this.includeSass) {
           bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
         } else {
@@ -322,7 +313,7 @@ module.exports = class extends Generator {
         appname: this.appname,
         includeSass: this.includeSass,
         includeBootstrap: this.includeBootstrap,
-        legacyBootstrap: this.legacyBootstrap,
+        startingPoint: this.startingPoint,
         includeModernizr: this.includeModernizr,
         includeJQuery: this.includeJQuery,
         bsPath: bsPath,

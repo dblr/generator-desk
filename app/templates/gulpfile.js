@@ -11,7 +11,7 @@ const reload = browserSync.reload;
 
 let dev = true;
 
-gulp.task('styles', () => {<% if (includeSass) { %>
+gulp.task('styles', () => {
   return gulp.src('app/styles/*.scss')
     .pipe($.plumber())
     .pipe($.if(dev, $.sourcemaps.init()))
@@ -19,9 +19,7 @@ gulp.task('styles', () => {<% if (includeSass) { %>
       outputStyle: 'expanded',
       precision: 10,
       includePaths: ['.']
-    }).on('error', $.sass.logError))<% } else { %>
-  return gulp.src('app/styles/*.css')
-    .pipe($.if(dev, $.sourcemaps.init()))<% } %>
+    }).on('error', $.sass.logError))
     .pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
     .pipe($.if(dev, $.sourcemaps.write()))
     .pipe(gulp.dest('.tmp/styles'))
@@ -124,7 +122,7 @@ gulp.task('serve', () => {
       '.tmp/fonts/**/*'
     ]).on('change', reload);
 
-    gulp.watch('app/styles/**/*.<%= includeSass ? 'scss' : 'css' %>', ['styles']);
+    gulp.watch('app/styles/**/*.', ['styles']);
 <% if (includeBabel) { -%>
     gulp.watch('app/scripts/**/*.js', ['scripts']);
 <% } -%>
@@ -173,18 +171,16 @@ gulp.task('serve:test', () => {
 });
 
 // inject bower components
-gulp.task('wiredep', () => {<% if (includeSass) { %>
+gulp.task('wiredep', () => {
   gulp.src('app/styles/*.scss')
     .pipe($.filter(file => file.stat && file.stat.size))
     .pipe(wiredep({
       ignorePath: /^(\.\.\/)+/
     }))
     .pipe(gulp.dest('app/styles'));
-<% } %>
   gulp.src('app/*.html')
-    .pipe(wiredep({<% if (includeBootstrap) { if (includeSass) { %>
-      exclude: ['bootstrap<% if (legacyBootstrap) { %>-sass<% } %>'],<% } else { %>
-      exclude: ['bootstrap.js'],<% }} %>
+    .pipe(wiredep({
+      exclude: ['bootstrap-sass'],
       ignorePath: /^(\.\.\/)*\.\./
     }))
     .pipe(gulp.dest('app'));
