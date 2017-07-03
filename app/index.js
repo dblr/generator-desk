@@ -8,6 +8,7 @@ const mkdirp = require('mkdirp');
 const _s = require('underscore.string');
 
 module.exports = class extends Generator {
+
   constructor(args, opts) {
     super(args, opts);
 
@@ -37,46 +38,45 @@ module.exports = class extends Generator {
   initializing() {
     this.pkg = require('../package.json');
     this.composeWith(
-      require.resolve(`generator-${this.options['test-framework']}/generators/app`),
-      { 'skip-install': this.options['skip-install'] }
+      require.resolve(`generator-${this.options['test-framework']}/generators/app`), {
+        'skip-install': this.options['skip-install']
+      }
     );
   }
-
   prompting() {
     if (!this.options['skip-welcome-message']) {
       this.log(yosay('Lets get going with Desk.com themes!'));
     }
 
     const prompts = [{
-      type    : 'input',
-      name    : 'name',
-      message : 'Whats the project or company name??',
-      default : this.appname
-    },{
-      type    : 'input',
-      name    : 'urlpath',
-      message : 'Path to hosted site files (for site deployment)'
-    },{
+      type: 'input',
+      name: 'name',
+      message: 'Whats the project or company name??',
+      default: this.appname
+    }, {
+      type: 'input',
+      name: 'urlpath',
+      message: 'Path to hosted site files (for site deployment)'
+    }, {
       type: 'list',
       name: 'startingPoint',
       message: 'Which version of Bootstrap would you like to include?',
       choices: [{
         name: 'v5 - Respnsive Template (Desk default)',
-        value: 'v5'
+        value: 'bootStrap'
       }, {
         name: 'Foundation - Starting point based off Foundation v5.3 framework',
         value: 'foundationFive'
       }, {
         name: 'Boot Strap 4 - Not yet available',
         value: 'bootStrapFour'
-      },{
+      }, {
         name: 'Foundation 6 - Not yet available',
         value: 'foundationSix'
       }],
     }];
-
     return this.prompt(prompts).then(answers => {
-      const { features } = answers;
+      const features = answers.features;
       const hasFeature = feat => features && features.indexOf(feat) !== -1;
 
       // manually deal with the response, get back and store the results.
@@ -88,27 +88,39 @@ module.exports = class extends Generator {
       this.appname = answers.name;
       this.urlpath = answers.urlpath;
     });
-  }
 
+  }
+  reviewing() {
+    this.log('LETS GOOOO!');
+    this.log(this.startingPoint);
+  }
   writing() {
     this._writingGulpfile();
+    this.log('_writingGulpfile');
     this._writingPackageJSON();
+    this.log('_writingPackageJSON');
     this._writingBabel();
+    this.log('_writingBabel');
     this._writingGit();
+    this.log('_writingGit');
     this._writingBower();
+    this.log('_writingBower');
     this._writingEditorConfig();
+    this.log('_writingEditorConfig');
     this._writingH5bp();
-    this._writingStyles();
-    this._writingScripts();
-    this._writingHtml();
+    this.log('_writingH5bp');
+    //this._writingStyles();
+    //this._writingScripts();
+    this._writingTemplate();
+    this.log('_writingTemplate');
     this._writingMisc();
+
   }
 
   _writingGulpfile() {
     this.fs.copyTpl(
       this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js'),
-      {
+      this.destinationPath('gulpfile.js'), {
         date: (new Date).toISOString().split('T')[0],
         name: this.pkg.name,
         version: this.pkg.version,
@@ -123,11 +135,7 @@ module.exports = class extends Generator {
   _writingPackageJSON() {
     this.fs.copyTpl(
       this.templatePath('_package.json'),
-      this.destinationPath('package.json'),
-      {
-        includeBabel: this.options['babel'],
-        includeJQuery: this.includeJQuery,
-      }
+      this.destinationPath('package.json')
     );
   }
 
@@ -154,56 +162,57 @@ module.exports = class extends Generator {
       private: true,
       dependencies: {}
     };
-    // ALL versions
+    let bsPath, bsPlugins;
+    //All Versions
     bowerJson.dependencies['jquery-validation'] = '^1.16.0';
     bowerJson.dependencies['font-awesome'] = '~4.7';
     bowerJson.dependencies['modernizr'] = '~2.8.1';
-
-    // v5 Responsive (bootstrap 3 based)
-    if (this.Startingpoint == 'v5') {
-      bowerJson.dependencies = {
-        'bootstrap-sass': '~3.3.5'
-      };
-      bowerJson.overrides = {
-        'bootstrap-sass': {
-          'main': [
-            'assets/stylesheets/_bootstrap.scss',
-            'assets/fonts/bootstrap/*',
-            'assets/javascripts/bootstrap.js'
-          ]
-        }
-      };
+    bowerJson.dependencies['jquery'] = '~1.9.1';
+    // BootStrap startingPoints
+    if (this.startingPoint == 'bootStrap') {
+      bowerJson.dependencies['bootstrap-sass'] = '~3.3.5';
+      bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
+      bsPlugins = [
+        'affix',
+        'alert',
+        'dropdown',
+        'tooltip',
+        'modal',
+        'transition',
+        'button',
+        'popover',
+        'carousel',
+        'scrollspy',
+        'collapse',
+        'tab'
+      ];
     }
-    // Foundation startingPoint
-    if(this.startingPoint == 'foundationFive') {
-        bowerJson.dependencies = {
-          'foundation': '~5.5.3'
-        };
+    if (this.startingPoint == 'bootStrapFour') {
+      bowerJson.dependencies['bootstrap'] = 'latest';
+      bsPath = '/bower_components/bootstrap/js/dist/';
+      bsPlugins = [
+        'util',
+        'alert',
+        'button',
+        'carousel',
+        'collapse',
+        'dropdown',
+        'modal',
+        'scrollspy',
+        'tab',
+        'tooltip',
+        'popover'
+      ];
     }
-    // Foundation 6 (not yet active)
-    if(this.startingPoint == 'foundationSix') {
-      bowerJson.dependencies = {
-        'foundation-sites': 'latest'
-      };
+    // Foundation startingPoints
+    if (this.startingPoint == 'foundationFive') {
+      bowerJson.dependencies['foundation'] = '5.5.3';
     }
-    //Bootstrap 4 (not yet active)
-    if(this.startingPoint == 'bootStrapFour') {
-        bowerJson.dependencies = {
-          'bootstrap': '~4.0.0-alpha.6'
-        };
+    if (this.startingPoint == 'foundationSix') {
+      bowerJson.dependencies['foundation-sites'] = 'latest';
     }
-    if (this.Startingpoint != 'bootStrapFour' || this.startingPoint != 'foundationSix') {
-      bowerJson.dependencies = {
-        'jquery': '~1.9.1'
-      }
-      bowerJson.resolutions = {
-        'jquery': '~1.9.1'
-      }
-    } else {
-      //Foundation 6/Bootstrap 4 Support (not yet active)
-    }
-
     // Write it down!
+
     this.fs.writeJSON('bower.json', bowerJson);
     this.fs.copy(
       this.templatePath('bowerrc'),
@@ -219,54 +228,73 @@ module.exports = class extends Generator {
   }
 
   _writingH5bp() {
-    this.fs.copy(
-      this.templatePath('favicon.ico'),
-      this.destinationPath('app/favicon.ico')
-    );
 
-    this.fs.copy(
-      this.templatePath('apple-touch-icon.png'),
-      this.destinationPath('app/apple-touch-icon.png')
-    );
-
-    this.fs.copy(
-      this.templatePath('robots.txt'),
-      this.destinationPath('app/robots.txt'));
   }
-
-  _writingStyles() {
-    let css = 'main';
-
-    if (this.includeSass) {
-      css += '.scss';
-    } else {
-      css += '.css';
-    }
-
-    this.fs.copyTpl(
-      this.templatePath(css),
-      this.destinationPath('app/styles/' + css),
-      {
-        includeBootstrap: this.includeBootstrap,
-        startingPoint: this.startingPoint
-      }
-    );
-  }
-
-  _writingScripts() {
-    this.fs.copy(
-      this.templatePath('main.js'),
-      this.destinationPath('app/scripts/main.js')
-    );
-  }
-
-  _writingHtml() {
+  _writingTemplate() {
     let bsPath, bsPlugins;
-
-    // path prefix for Bootstrap JS files
-    if (this.includeBootstrap) {
-
-      // Bootstrap 4
+    this.fs.copyTpl(
+      this.templatePath('data.json'),
+      this.destinationPath('app/data.json')
+    );
+    if (this.startingPoint == 'foundationFive') {
+      this.fs.copyTpl(
+        this.templatePath('foundation/'),
+        this.destinationPath('app/'), {
+          appname: this.appname,
+          includeSass: this.includeSass,
+          startingPoint: this.startingPoint,
+          includeModernizr: this.includeModernizr,
+          includeJQuery: this.includeJQuery,
+          bsPath: bsPath,
+          bsPlugins: bsPlugins
+        }
+      );
+    }
+    // Foundation
+    if (this.startingPoint == 'foundationSix') {
+      this.fs.copyTpl(
+        this.templatePath('foundation/'),
+        this.destinationPath('app/'), {
+          appname: this.appname,
+          includeFoundation: this.includeFoundation,
+          includeFoundationSix: this.includeFoundationSix,
+          includeBootstrap: this.includeBootstrap,
+          includeModernizr: this.includeModernizr,
+          includeJQuery: this.includeJQuery,
+        }
+      );
+    }
+    if (this.startingPoint == 'bootStrap') {
+      bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
+      bsPlugins = [
+        'affix',
+        'alert',
+        'dropdown',
+        'tooltip',
+        'modal',
+        'transition',
+        'button',
+        'popover',
+        'carousel',
+        'scrollspy',
+        'collapse',
+        'tab'
+      ];
+      this.fs.copyTpl(
+        this.templatePath('v5/'),
+        this.destinationPath('app/'), {
+          appname: this.appname,
+          includeSass: this.includeSass,
+          startingPoint: this.startingPoint,
+          includeModernizr: this.includeModernizr,
+          includeJQuery: this.includeJQuery,
+          bsPath: bsPath,
+          bsPlugins: bsPlugins
+        }
+      );
+    }
+    //BS FOUR
+    if (this.startingPoint == 'bootStrapFour') {
       bsPath = '/bower_components/bootstrap/js/dist/';
       bsPlugins = [
         'util',
@@ -281,91 +309,64 @@ module.exports = class extends Generator {
         'tooltip',
         'popover'
       ];
-
-      // Bootstrap 3
-      if (this.startingPoint) {
-        if (this.includeSass) {
-          bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
-        } else {
-          bsPath = '/bower_components/bootstrap/js/';
+      this.fs.copyTpl(
+        this.templatePath('v5/'),
+        this.destinationPath('app/'), {
+          appname: this.appname,
+          includeSass: this.includeSass,
+          startingPoint: this.startingPoint,
+          includeModernizr: this.includeModernizr,
+          includeJQuery: this.includeJQuery,
+          bsPath: bsPath,
+          bsPlugins: bsPlugins
         }
-        bsPlugins = [
-          'affix',
-          'alert',
-          'dropdown',
-          'tooltip',
-          'modal',
-          'transition',
-          'button',
-          'popover',
-          'carousel',
-          'scrollspy',
-          'collapse',
-          'tab'
-        ];
-      }
-    }
+      );
+}
+}
+_writingMisc() {
+  mkdirp('app/images');
+  mkdirp('app/fonts');
+}
 
-    this.fs.copyTpl(
-      this.templatePath('index.html'),
-      this.destinationPath('app/index.html'),
-      {
-        appname: this.appname,
-        includeSass: this.includeSass,
-        includeBootstrap: this.includeBootstrap,
-        startingPoint: this.startingPoint,
-        includeModernizr: this.includeModernizr,
-        includeJQuery: this.includeJQuery,
-        bsPath: bsPath,
-        bsPlugins: bsPlugins
-      }
-    );
-  }
+install() {
+  const hasYarn = commandExists('yarn');
+  this.installDependencies({
+    npm: !hasYarn,
+    bower: true,
+    yarn: hasYarn,
+    skipMessage: this.options['skip-install-message'],
+    skipInstall: this.options['skip-install']
+  });
+}
 
-  _writingMisc() {
-    mkdirp('app/images');
-    mkdirp('app/fonts');
-  }
-
-  install() {
-    const hasYarn = commandExists('yarn');
-    this.installDependencies({
-      npm: !hasYarn,
-      bower: true,
-      yarn: hasYarn,
-      skipMessage: this.options['skip-install-message'],
-      skipInstall: this.options['skip-install']
-    });
-  }
-
-  end() {
-    const bowerJson = this.fs.readJSON(this.destinationPath('bower.json'));
-    const howToInstall = `
+end() {
+  const bowerJson = this.fs.readJSON(this.destinationPath('bower.json'));
+  const howToInstall = `
 After running ${chalk.yellow.bold('npm install & bower install')}, inject your
 front end dependencies by running ${chalk.yellow.bold('gulp wiredep')}.`;
 
-    if (this.options['skip-install']) {
-      this.log(howToInstall);
-      return;
-    }
+  if (this.options['skip-install']) {
+    this.log(howToInstall);
+    return;
+  }
 
-    // wire Bower packages to .html
+  // wire Bower packages to .html
+  wiredep({
+    bowerJson: bowerJson,
+    directory: 'bower_components',
+    exclude: ['bootstrap-sass', 'bootstrap.js'],
+    ignorePath: /^(\.\.\/)*\.\./,
+    src: 'app/index.html'
+  });
+
+  if (this.includeSass) {
+    // wire Bower packages to .scss
     wiredep({
       bowerJson: bowerJson,
       directory: 'bower_components',
-      exclude: ['bootstrap-sass', 'bootstrap.js'],
-      ignorePath: /^(\.\.\/)*\.\./,
-      src: 'app/index.html'
+      ignorePath: /^(\.\.\/)+/,
+      src: 'app/styles/*.scss'
     });
-
-    if (this.includeSass) {
-      // wire Bower packages to .scss
-      wiredep({
-        bowerJson: bowerJson,
-        directory: 'bower_components',
-        ignorePath: /^(\.\.\/)+/,
-        src: 'app/styles/*.scss'
-      });
-    }
   }
+}
 }
