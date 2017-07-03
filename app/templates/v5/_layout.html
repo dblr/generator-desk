@@ -314,12 +314,8 @@
               {{ search_form_begin }}
               <div class="col-md-12">
                 {{template_form_params}}
-                {% if MBSearchSuggest == true %}
-                  <input type="text" id="qMB" name="q" maxlength="100" value="" placeholder="{{system.snippets.have_a_question}}" class="input form-control" autocomplete="off" />
-                {% else %}
-                  <input type="text" id="q" name="q" maxlength="100" value="" placeholder="{{system.snippets.have_a_question}}" class="input form-control" />
-                {% endif %}
-                  <button type="submit" class="fa fa-search" id="support-search-submit" value="{{system.snippets.search}}"></button>
+                <input type="text" id="searchInput" name="q" maxlength="100" value="" placeholder="{{system.snippets.have_a_question}}" class="input form-control" autocomplete="off" />
+                <button type="submit" class="fa fa-search" id="support-search-submit" value="{{system.snippets.search}}"></button>
               </div>
               {{ search_form_end }}
             </div>
