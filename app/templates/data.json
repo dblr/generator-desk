@@ -206,6 +206,7 @@
                 },
                 "cases": [{
                     "id": 0,
+                    "portal_url": "myportal-show.html",
                     "subject": "Intergeek Drake",
                     "user": {
                         "name_public": "Janice Cook"
@@ -219,6 +220,7 @@
                     }
                 }, {
                     "id": 1,
+                    "portal_url": "myportal-show.html",
                     "subject": "Thredz Mcmillan",
                     "user": {
                         "name_public": "Adeline Snyder"
@@ -232,6 +234,7 @@
                     }
                 }, {
                     "id": 2,
+                    "portal_url": "myportal-show.html",
                     "subject": "Orbixtar Reed",
                     "user": {
                         "name_public": "Marisa Fisher"
@@ -245,6 +248,7 @@
                     }
                 }, {
                     "id": 3,
+                    "portal_url": "myportal-show.html",
                     "subject": "Ovation Nunez",
                     "user": {
                         "name_public": "Corinne Blackwell"
@@ -258,6 +262,7 @@
                     }
                 }, {
                     "id": 4,
+                    "portal_url": "myportal-show.html",
                     "subject": "Utarian Oliver",
                     "user": {
                         "name_public": "Casey Bryan"
@@ -271,6 +276,7 @@
                     }
                 }, {
                     "id": 5,
+                    "portal_url": "myportal-show.html",
                     "subject": "Cablam Sharpe",
                     "user": {
                         "name_public": "Kara Stanley"
@@ -284,6 +290,7 @@
                     }
                 }, {
                     "id": 6,
+                    "portal_url": "myportal-show.html",
                     "subject": "Ersum Delgado",
                     "user": {
                         "name_public": "Cherry Bruce"
@@ -297,6 +304,7 @@
                     }
                 }, {
                     "id": 7,
+                    "portal_url": "myportal-show.html",
                     "subject": "Hotcakes Randolph",
                     "user": {
                         "name_public": "Mavis Wheeler"
@@ -310,6 +318,7 @@
                     }
                 }, {
                     "id": 8,
+                    "portal_url": "myportal-show.html",
                     "subject": "Eyewax Norman",
                     "user": {
                         "name_public": "Tamra Welch"
@@ -323,6 +332,7 @@
                     }
                 }, {
                     "id": 9,
+                    "portal_url": "myportal-show.html",
                     "subject": "Exospeed Whitney",
                     "user": {
                         "name_public": "Maureen Mcintosh"
@@ -336,6 +346,7 @@
                     }
                 }, {
                     "id": 10,
+                    "portal_url": "myportal-show.html",
                     "subject": "Ecratic Wiggins",
                     "user": {
                         "name_public": "Allison Avila"
@@ -349,6 +360,7 @@
                     }
                 }, {
                     "id": 11,
+                    "portal_url": "myportal-show.html",
                     "subject": "Bristo Perez",
                     "user": {
                         "name_public": "Padilla Lindsey"
@@ -362,6 +374,7 @@
                     }
                 }, {
                     "id": 12,
+                    "portal_url": "myportal-show.html",
                     "subject": "Crustatia Stevenson",
                     "user": {
                         "name_public": "Ines Blackburn"
@@ -375,6 +388,7 @@
                     }
                 }, {
                     "id": 13,
+                    "portal_url": "myportal-show.html",
                     "subject": "Parleynet Perkins",
                     "user": {
                         "name_public": "Jerry Mendoza"
@@ -388,6 +402,7 @@
                     }
                 }, {
                     "id": 14,
+                    "portal_url": "myportal-show.html",
                     "subject": "Digifad Stuart",
                     "user": {
                         "name_public": "Melva Bonner"
@@ -401,6 +416,7 @@
                     }
                 }, {
                     "id": 15,
+                    "portal_url": "myportal-show.html",
                     "subject": "Progenex Greene",
                     "user": {
                         "name_public": "Alma Schroeder"
@@ -414,6 +430,7 @@
                     }
                 }, {
                     "id": 16,
+                    "portal_url": "myportal-show.html",
                     "subject": "Slumberia Whitley",
                     "user": {
                         "name_public": "Lula Foreman"
@@ -427,6 +444,7 @@
                     }
                 }, {
                     "id": 17,
+                    "portal_url": "myportal-show.html",
                     "subject": "Zaggles Irwin",
                     "user": {
                         "name_public": "Alisa Harding"
@@ -440,6 +458,7 @@
                     }
                 }, {
                     "id": 18,
+                    "portal_url": "myportal-show.html",
                     "subject": "Zidox Price",
                     "user": {
                         "name_public": "Hayes Clarke"
@@ -453,6 +472,7 @@
                     }
                 }, {
                     "id": 19,
+                    "portal_url": "myportal-show.html",
                     "subject": "Wrapture Hess",
                     "user": {
                         "name_public": "Ana Harrison"
@@ -466,6 +486,7 @@
                     }
                 }, {
                     "id": 20,
+                    "portal_url": "myportal-show.html",
                     "subject": "Animalia Maynard",
                     "user": {
                         "name_public": "Deanna Lynn"
@@ -479,6 +500,7 @@
                     }
                 }, {
                     "id": 21,
+                    "portal_url": "myportal-show.html",
                     "subject": "Orbin Emerson",
                     "user": {
                         "name_public": "Ryan Jenkins"
@@ -492,6 +514,7 @@
                     }
                 }, {
                     "id": 22,
+                    "portal_url": "myportal-show.html",
                     "subject": "Assistix Flynn",
                     "user": {
                         "name_public": "Bauer Hamilton"
@@ -547,7 +570,7 @@
     },
     "article": {
         "subject_plain": "Interesting Article Title",
-        "body": "<ul class='article-nav'> <li><a href='#top'>Top</a></li> <li><a href='#section-one'>Section Two</a></li> <li><a href='#section-two'>Section Three</a></li> <li><a href='#section-three'>Section Four</a></li> <li><a href='#section-four'>Section Five</a></li> <li><a href='#section-five'>Section Six</a></li> </ul><p>Ea consectetur laboris eiusmod eiusmod mollit est ex ad velit proident voluptate exercitation. Adipisicing aliquip eu officia proident veniam quis enim in enim culpa nostrud nisi reprehenderit reprehenderit. Ad nisi amet quis nulla pariatur consequat voluptate ipsum irure consequat eiusmod aliquip eu dolore. Enim in occaecat mollit qui do laborum adipisicing minim ex duis fugiat exercitation dolore.\r\nQuis sit esse fugiat laboris ex nostrud aliqua ullamco do laborum dolore dolor adipisicing cillum. Pariatur sint in nisi culpa veniam proident ullamco sint fugiat ut. Commodo incididunt consequat voluptate duis in dolor quis officia excepteur.\r\n</p> <p>Culpa eiusmod id duis reprehenderit minim culpa. Aliqua velit consequat voluptate amet aliquip magna ex amet nulla sit magna sint enim. Sint sit exercitation id laboris nulla irure tempor adipisicing Lorem.\r\n</p> <dl> <dt>Definition Title</dt> <dd>Definition Cras justo odio, dapibus ac facilisis in, egestas eget quam. Nullam id dolor id nibh ultricies vehicula ut id elit.</dd> <dt>Another Important Title</dt> <dd>Commodo qui commodo cillum incididunt laborum proident nisi exercitation eiusmod nostrud incididunt.</dd> <dt>Repeating Title</dt> <dd>Definition Cras justo odio, dapibus ac facilisis in, egestas eget quam. Nullam id dolor id nibh ultricies vehicula ut id elit.</dd> </dl> <p id='section-one'>Est laborum labore aliqua id anim reprehenderit ipsum cillum velit sint dolor. Et pariatur sunt qui esse nulla dolore laboris sunt. Consectetur aliquip magna quis sunt do consequat aliquip sit deserunt. Ex labore cupidatat eiusmod mollit esse proident aliqua dolor in ea.\r\nCommodo laboris veniam exercitation amet reprehenderit irure tempor minim ex minim eu cillum labore. Ex minim cillum proident amet esse ea mollit elit irure ea. Aliqua adipisicing aute nulla aliquip ex dolor culpa officia sit amet Lorem occaecat occaecat excepteur. Velit mollit commodo non sit mollit duis. In do consectetur ut aute nisi est voluptate minim veniam pariatur ipsum qui nostrud. Consectetur sint labore laborum pariatur aute deserunt labore aliqua veniam deserunt ea sit cillum ut. Cillum duis est enim culpa sit amet elit.\r\n</p> <blockquote> Those people who think they know everything are a great annoyance to those of us who do. <cite>Isaac Asimov</cite> </blockquote> <p>Id officia est aute esse occaecat irure laboris pariatur. Exercitation non do aute tempor culpa ex elit reprehenderit. Tempor elit deserunt et qui sint reprehenderit ea veniam pariatur non. Nisi do proident nostrud nostrud reprehenderit ex veniam culpa eiusmod velit voluptate tempor nisi. Nostrud occaecat commodo commodo Lorem veniam cupidatat nulla voluptate aliquip aute. Exercitation magna Lorem irure reprehenderit et. Occaecat occaecat anim deserunt occaecat amet anim eu do duis adipisicing do dolor excepteur.\r\n</p> <p id='section-two'>Est laborum labore aliqua id anim reprehenderit ipsum cillum velit sint dolor. Et pariatur sunt qui esse nulla dolore laboris sunt. Consectetur aliquip magna quis sunt do consequat aliquip sit deserunt. Ex labore cupidatat eiusmod mollit esse proident aliqua dolor in ea.\r\nCommodo laboris veniam exercitation amet reprehenderit irure tempor minim ex minim eu cillum labore. Ex minim cillum proident amet esse ea mollit elit irure ea. Aliqua adipisicing aute nulla aliquip ex dolor culpa officia sit amet Lorem occaecat occaecat excepteur. Velit mollit commodo non sit mollit duis. In do consectetur ut aute nisi est voluptate minim veniam pariatur ipsum qui nostrud. Consectetur sint labore laborum pariatur aute deserunt labore aliqua veniam deserunt ea sit cillum ut. Cillum duis est enim culpa sit amet elit.\r\n</p> <ul class='no-bullet'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ul> <li>Nested List Item</li> <li>Nested List Item</li> <li>Nested List Item</li> </ul> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ul> <p>Commodo qui commodo cillum incididunt laborum proident nisi exercitation eiusmod nostrud incididunt. Dolor laborum nostrud veniam velit. Officia consectetur ea in laboris nostrud deserunt nulla aliquip eu.\r\nEst ut amet et ad irure veniam aliquip cillum. Veniam eiusmod qui officia nisi excepteur eiusmod in fugiat est consequat. Magna sit nisi sunt in pariatur reprehenderit quis velit do. Tempor cillum id consectetur qui esse consequat ut tempor magna nostrud. Laboris dolor enim cillum aute quis. In do adipisicing enim do eiusmod consequat aliquip.\r\n</p> <hr> <h1 id='section-three'>h1. This is a very large header.</h1> <h2>h2. This is a large header.</h2> <h3>h3. This is a medium header.</h3> <h4>h4. This is a moderate header.</h4> <h5>h5. This is a small header.</h5> <h6>h6. This is a tiny header.</h6> <hr> <h1 class='subheader'>h1.subheader</h1> <h2 class='subheader'>h2.subheader</h2> <h3 class='subheader'>h3.subheader</h3> <h4 class='subheader'>h4.subheader</h4> <h5 class='subheader'>h5.subheader</h5> <h6 class='subheader'>h6.subheader</h6> <hr> <ul class='disc'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ul> <li>Nested list item</li> <li>Nested list item</li> <li>Nested list item</li> </ul> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ul> <ul class='circle'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ul> <li>Nested List Item</li> <li>Nested List Item</li> <li>Nested List Item</li> </ul> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ul> <ul class='square'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ul> <li>Nested List Item</li> <li>Nested List Item</li> <li>Nested List Item</li> </ul> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ul> <ul class='no-bullet'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ul> <li>Nested List Item</li> <li>Nested List Item</li> <li>Nested List Item</li> </ul> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ul> <ol id='section-four'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ol> <li>Nested List Item</li> <li>Nested List Item</li> <li>Nested List Item</li> </ol> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ol> <ul class='vcard'> <li class='fn'>Gaius Baltar</li> <li class='street-address'>123 Colonial Ave.</li> <li class='locality'>Caprica City</li> <li><span class='state'>Caprica</span>, <span class='zip'>12345</span></li> <li class='email'> <a href='#'>g.baltar@example.com</a> </li> </ul>",  
+        "body": "<ul class='article-nav'> <li><a href='#top'>Top</a></li> <li><a href='#section-one'>Section Two</a></li> <li><a href='#section-two'>Section Three</a></li> <li><a href='#section-three'>Section Four</a></li> <li><a href='#section-four'>Section Five</a></li> <li><a href='#section-five'>Section Six</a></li> </ul><p>Ea consectetur laboris eiusmod eiusmod mollit est ex ad velit proident voluptate exercitation. Adipisicing aliquip eu officia proident veniam quis enim in enim culpa nostrud nisi reprehenderit reprehenderit. Ad nisi amet quis nulla pariatur consequat voluptate ipsum irure consequat eiusmod aliquip eu dolore. Enim in occaecat mollit qui do laborum adipisicing minim ex duis fugiat exercitation dolore.\r\nQuis sit esse fugiat laboris ex nostrud aliqua ullamco do laborum dolore dolor adipisicing cillum. Pariatur sint in nisi culpa veniam proident ullamco sint fugiat ut. Commodo incididunt consequat voluptate duis in dolor quis officia excepteur.\r\n</p> <p>Culpa eiusmod id duis reprehenderit minim culpa. Aliqua velit consequat voluptate amet aliquip magna ex amet nulla sit magna sint enim. Sint sit exercitation id laboris nulla irure tempor adipisicing Lorem.\r\n</p> <dl> <dt>Definition Title</dt> <dd>Definition Cras justo odio, dapibus ac facilisis in, egestas eget quam. Nullam id dolor id nibh ultricies vehicula ut id elit.</dd> <dt>Another Important Title</dt> <dd>Commodo qui commodo cillum incididunt laborum proident nisi exercitation eiusmod nostrud incididunt.</dd> <dt>Repeating Title</dt> <dd>Definition Cras justo odio, dapibus ac facilisis in, egestas eget quam. Nullam id dolor id nibh ultricies vehicula ut id elit.</dd> </dl> <p id='section-one'>Est laborum labore aliqua id anim reprehenderit ipsum cillum velit sint dolor. Et pariatur sunt qui esse nulla dolore laboris sunt. Consectetur aliquip magna quis sunt do consequat aliquip sit deserunt. Ex labore cupidatat eiusmod mollit esse proident aliqua dolor in ea.\r\nCommodo laboris veniam exercitation amet reprehenderit irure tempor minim ex minim eu cillum labore. Ex minim cillum proident amet esse ea mollit elit irure ea. Aliqua adipisicing aute nulla aliquip ex dolor culpa officia sit amet Lorem occaecat occaecat excepteur. Velit mollit commodo non sit mollit duis. In do consectetur ut aute nisi est voluptate minim veniam pariatur ipsum qui nostrud. Consectetur sint labore laborum pariatur aute deserunt labore aliqua veniam deserunt ea sit cillum ut. Cillum duis est enim culpa sit amet elit.\r\n</p> <blockquote> Those people who think they know everything are a great annoyance to those of us who do. <cite>Isaac Asimov</cite> </blockquote> <p>Id officia est aute esse occaecat irure laboris pariatur. Exercitation non do aute tempor culpa ex elit reprehenderit. Tempor elit deserunt et qui sint reprehenderit ea veniam pariatur non. Nisi do proident nostrud nostrud reprehenderit ex veniam culpa eiusmod velit voluptate tempor nisi. Nostrud occaecat commodo commodo Lorem veniam cupidatat nulla voluptate aliquip aute. Exercitation magna Lorem irure reprehenderit et. Occaecat occaecat anim deserunt occaecat amet anim eu do duis adipisicing do dolor excepteur.\r\n</p> <p id='section-two'>Est laborum labore aliqua id anim reprehenderit ipsum cillum velit sint dolor. Et pariatur sunt qui esse nulla dolore laboris sunt. Consectetur aliquip magna quis sunt do consequat aliquip sit deserunt. Ex labore cupidatat eiusmod mollit esse proident aliqua dolor in ea.\r\nCommodo laboris veniam exercitation amet reprehenderit irure tempor minim ex minim eu cillum labore. Ex minim cillum proident amet esse ea mollit elit irure ea. Aliqua adipisicing aute nulla aliquip ex dolor culpa officia sit amet Lorem occaecat occaecat excepteur. Velit mollit commodo non sit mollit duis. In do consectetur ut aute nisi est voluptate minim veniam pariatur ipsum qui nostrud. Consectetur sint labore laborum pariatur aute deserunt labore aliqua veniam deserunt ea sit cillum ut. Cillum duis est enim culpa sit amet elit.\r\n</p> <ul class='no-bullet'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ul> <li>Nested List Item</li> <li>Nested List Item</li> <li>Nested List Item</li> </ul> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ul> <p>Commodo qui commodo cillum incididunt laborum proident nisi exercitation eiusmod nostrud incididunt. Dolor laborum nostrud veniam velit. Officia consectetur ea in laboris nostrud deserunt nulla aliquip eu.\r\nEst ut amet et ad irure veniam aliquip cillum. Veniam eiusmod qui officia nisi excepteur eiusmod in fugiat est consequat. Magna sit nisi sunt in pariatur reprehenderit quis velit do. Tempor cillum id consectetur qui esse consequat ut tempor magna nostrud. Laboris dolor enim cillum aute quis. In do adipisicing enim do eiusmod consequat aliquip.\r\n</p> <hr> <h1 id='section-three'>h1. This is a very large header.</h1> <h2>h2. This is a large header.</h2> <h3>h3. This is a medium header.</h3> <h4>h4. This is a moderate header.</h4> <h5>h5. This is a small header.</h5> <h6>h6. This is a tiny header.</h6> <hr> <h1 class='subheader'>h1.subheader</h1> <h2 class='subheader'>h2.subheader</h2> <h3 class='subheader'>h3.subheader</h3> <h4 class='subheader'>h4.subheader</h4> <h5 class='subheader'>h5.subheader</h5> <h6 class='subheader'>h6.subheader</h6> <hr> <ul class='disc'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ul> <li>Nested list item</li> <li>Nested list item</li> <li>Nested list item</li> </ul> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ul> <ul class='circle'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ul> <li>Nested List Item</li> <li>Nested List Item</li> <li>Nested List Item</li> </ul> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ul> <ul class='square'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ul> <li>Nested List Item</li> <li>Nested List Item</li> <li>Nested List Item</li> </ul> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ul> <ul class='no-bullet'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ul> <li>Nested List Item</li> <li>Nested List Item</li> <li>Nested List Item</li> </ul> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ul> <ol id='section-four'> <li>List item with a much longer description or more content.</li> <li>List item</li> <li>List item <ol> <li>Nested List Item</li> <li>Nested List Item</li> <li>Nested List Item</li> </ol> </li> <li>List item</li> <li>List item</li> <li>List item</li> </ol> <ul class='vcard'> <li class='fn'>Gaius Baltar</li> <li class='street-address'>123 Colonial Ave.</li> <li class='locality'>Caprica City</li> <li><span class='state'>Caprica</span>, <span class='zip'>12345</span></li> <li class='email'> <a href='#'>g.baltar@example.com</a> </li> </ul>",
         "number_of_attachments": 5,
         "keywords": "this is a keyword, this is another, tag:keyword,tag:admin support, tag:agent support, another keyword, arthur:James Brown",
         "kb_article_attachments":[{

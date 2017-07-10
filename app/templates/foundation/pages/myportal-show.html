@@ -2,10 +2,12 @@
 {% extends "../_layout.html" %}
 {% assign page = 'myportal_show' %}
 {% assign email.attachments.size = 2 %}
+{% assign form_begin = '<form action="/" enctype="multipart/form-data" class="new_reply" id="new_reply" method="post" novalidate="novalidate">' %}
 {% block main %}
-{% assign case = desk.page.content.case %}
 <!-- endbuild -->
 
+
+{% assign case = desk.page.content.case %}
   <div id="desk-external-variables-myaccount" class="desk-external-variables hide">
     <div id="system-snippets-reply_required">{{system.snippets.message_required}}</div>
     <div id="max_number_attachments">{{desk.system.max_attachments}}</div>
@@ -653,7 +655,7 @@
       </div>
     </div>
   </div>
-  
+
 <!-- build:endblock -->
 {% endblock %}
 <!-- endbuild -->

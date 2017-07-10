@@ -456,30 +456,30 @@
                             <li class="active crumb">{{system.snippets.live_chat}}</li>
                         {% elsif page == "myportal_index" %}
                             <li class="crumb"><a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> </li>
-                            <li class="active crumb">{{desk.system.snippets.my_cases}}</li>
+                            <li class="active crumb">{{system.snippets.my_cases}}</li>
                         {% elsif page == "myportal_show" %}
                             <li class="crumb"><a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> </li>
                             {% if desk.customer.can_access_company_tickets? %}
                             <li class="crumb"><a href='{{ desk.system.links.myportal }}'>{{ desk.page.content.case.customer.name }}</a></li>
                             {% endif %}
-                            <li class="crumb"><a href='{{ desk.system.links.myportal }}'>{{desk.system.snippets.my_cases}}</a> </li>
+                            <li class="crumb"><a href='{{ desk.system.links.myportal }}'>{{system.snippets.my_cases}}</a> </li>
                             <li class="active crumb">{{desk.page.content.case.subject | clip:30 }}</li>
                         {% elsif page == "login" %}
                             <li class="crumb"><a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> </li>
-                            <li class="crumb active">{{desk.system.snippets.login_title}}</li>
+                            <li class="crumb active">{{system.snippets.login_title}}</li>
                         {% elsif page == "registration" %}
                             <li class="crumb"><a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> </li>
-                            <li class="crumb"><a href='{{ site.authentication_login_url }}'>{{desk.system.snippets.login_title}}</a> </li>
-                            <li class="crumb active">{{desk.system.snippets.registration_title}}</li>
+                            <li class="crumb"><a href='{{ site.authentication_login_url }}'>{{system.snippets.login_title}}</a> </li>
+                            <li class="crumb active">{{system.snippets.registration_title}}</li>
                         {% elsif page == "forgot_password" %}
                             <li class="crumb"><a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> </li>
-                            <li class="crumb"><a href='{{desk.system.links.login}}'>{{desk.system.snippets.login_title}}</a> </li>
-                            <li class="crumb active">{{desk.system.snippets.password_reset_title}}</li>
+                            <li class="crumb"><a href='{{desk.system.links.login}}'>{{system.snippets.login_title}}</a> </li>
+                            <li class="crumb active">{{system.snippets.password_reset_title}}</li>
                         {% elsif page == "myaccount" %}
                             <li class="crumb"><a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> </li>
-                            <li class="active crumb">{{desk.system.snippets.account_title}}</li>
+                            <li class="active crumb">{{system.snippets.account_title}}</li>
                         {% elsif page == "authentication_verification" %}
-                            <li><a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> &rsaquo; {{desk.system.snippets.auth_verification_title}}</li>
+                            <li><a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> &rsaquo; {{system.snippets.auth_verification_title}}</li>
                         {% endif %}
                       </ul>
                   </div>

@@ -50,3 +50,32 @@ $(document).ready(function() {
   enableMultiAttachments();
   attachFileUploadFields();
 });
+$.extend({
+	getUrlVars: function() {
+		var vars = [],
+			hash;
+		var queryStr = window.location.href.indexOf("?");
+		if (queryStr >= 0) {
+			var hashes = window.location.href.slice(queryStr + 1).split("&");
+			for (var i = 0; i < hashes.length; i++) {
+				hash = hashes[i].split("=");
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1]
+			}
+		}
+		return vars
+	},
+	getUrlVar: function(name) {
+		var vars = $.getUrlVars();
+		if (vars.length > 0 && vars.indexOf(name) >= 0) return $.getUrlVars()[name];
+		return null
+	},
+	updateOrAddVar: function(name, value) {
+		var search = "";
+		var urlVars = $.getUrlVars();
+		$(urlVars).each(function(index, val) {
+			if (val != name) search += val + "=" + urlVars[val] + "&"
+		});
+		document.location.search = "?" + search + name + "=" + value
+	}
+});
