@@ -13,7 +13,7 @@
     <!-- bower:css -->
     <!-- endbower -->
     <!-- endbuild -->
-
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
@@ -532,13 +532,14 @@
   <!-- bower:js -->
   <!-- endbower -->
   <!-- endbuild -->
-  <% if (startingPoint == 'v5') { %>
+  <% if (startingPoint == 'bootStrap' || startingPoint == 'bootStrapFour') { %>
   <!-- build:js scripts/plugins.js -->
   <% bsPlugins.forEach(function (plugin) { -%>
   <script src="<%= bsPath + plugin %>.js"></script>
   <% }) -%>
   <!-- endbuild -->
   <% } %>
+  <script src="scripts/portal-reqs.js"></script>
   <!-- build:js scripts/main.js -->
   <script src="scripts/main.js"></script>
   <!-- endbuild -->

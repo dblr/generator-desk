@@ -162,7 +162,6 @@ module.exports = class extends Generator {
       private: true,
       dependencies: {}
     };
-    let bsPath, bsPlugins;
     //All Versions
     bowerJson.dependencies['jquery-validation'] = '^1.16.0';
     bowerJson.dependencies['font-awesome'] = '~4.7';
@@ -171,38 +170,9 @@ module.exports = class extends Generator {
     // BootStrap startingPoints
     if (this.startingPoint == 'bootStrap') {
       bowerJson.dependencies['bootstrap-sass'] = '~3.3.5';
-      bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
-      bsPlugins = [
-        'affix',
-        'alert',
-        'dropdown',
-        'tooltip',
-        'modal',
-        'transition',
-        'button',
-        'popover',
-        'carousel',
-        'scrollspy',
-        'collapse',
-        'tab'
-      ];
     }
     if (this.startingPoint == 'bootStrapFour') {
       bowerJson.dependencies['bootstrap'] = 'latest';
-      bsPath = '/bower_components/bootstrap/js/dist/';
-      bsPlugins = [
-        'util',
-        'alert',
-        'button',
-        'carousel',
-        'collapse',
-        'dropdown',
-        'modal',
-        'scrollspy',
-        'tab',
-        'tooltip',
-        'popover'
-      ];
     }
     // Foundation startingPoints
     if (this.startingPoint == 'foundationFive') {
