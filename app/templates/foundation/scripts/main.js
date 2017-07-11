@@ -609,6 +609,7 @@ if (currentPage == 'myportal_index') {
         window.location = href;
       }
     });
+    var registration_in_progress ="";
     if (registration_in_progress) {
       $("#registration-in-progress").show();
       $("#MyCases").hide();
@@ -1028,19 +1029,19 @@ if (currentPage == 'page_search_result') {
   if (MBSearchPage == 'true') {
     jQuery(document).ready(function () {
       //VARIABLES
-      themeID = 0; //ONLY NEEDED IF WORKING ON THEME AND WANT TO RENDER LINKS w/THEME ID
-      brandCount = 0;
-      displayLimit = 10;
-      totalCount = 0;
-      searchTerm = $('#search-term').html(); //LOADS SEARCH TERM
-      systemLanguageDesk = $('#system_language').html(); //LOADS SYSTEM LANGUAGE
+      var themeID = 0, //ONLY NEEDED IF WORKING ON THEME AND WANT TO RENDER LINKS w/THEME ID
+      brandCount = 0,
+      displayLimit = 10,
+      totalCount = 0,
+      searchTerm = $('#search-term').html(), //LOADS SEARCH TERM
+      systemLanguageDesk = $('#system_language').html(), //LOADS SYSTEM LANGUAGE
       readArticle = $('#read-article').html(); //LOADS READ ARTICLE SNIPPET
       //FOR EACH BRAND FUNCTION
       $('#site-brands > div').each(function (i, e) {
         //LOOP VARIABLES
-        brandID = e.id;
         brandCount++;
-        totalBrands = $('#site-brands > div').length;
+        var brandID = e.id,
+        totalBrands = $('#site-brands > div').length,
         brandName = e.textContent;
         //ADDING TAB ELEMENTS FOR BRANDS AND ALL RESULTS
         if (brandCount == 1) {
@@ -1050,15 +1051,15 @@ if (currentPage == 'page_search_result') {
           $('#siteResults ul.tabs').append('<li class="tab-title" role="presentation"><a href="#panel-' + brandID + '" aria-controls="panel-' + brandID + '" role="tab" data-toggle="tab">' + brandName + '</a></li>');
           $('#siteResults div.tabs-content').append('<section class="content" role="tabpanel" aria-hidden="true" id="panel-' + brandID + '" role="tabpanel" class="tab-pane brand"><div class="articles"></div><div class="footer"></div></section>');
         }
-        MultiSearch = function MultiSearch(data) {
-          brandID = e.id;
-          resultsCount = 0;
-          auto_suggest_content = "";
-          auto_suggest_articles = "";
+      function MultiSearch(data) {
+          var brandID = e.id,
+          resultsCount = 0,
+          auto_suggest_content = "",
+          auto_suggest_articles = "",
           auto_suggest_questions = "";
           $.each(data, function () {
             var html = $(this.label);
-            article_title = html.find(".article-autocomplete-subject").html();
+            var article_title = html.find(".article-autocomplete-subject").html(),
             article_body = html.find(".article-autocomplete-body").html();
             auto_suggest_articles += '<article class="row result article"><div class="columns medium-12"><h3><a href="' + this.id + '&t=' + themeID + '">' + article_title + '</a></h3><p>' + article_body + '</p><a class="button" href="' + this.id + '">' + readArticle + '</a></div></article><hr>';
             resultsCount++;
@@ -1073,7 +1074,7 @@ if (currentPage == 'page_search_result') {
           }
         };
         //NO RESULTS
-        MultiFail = function MultiFail(data) {
+      function MultiFail(data) {
           brandID = e.id;
           //DISPLAY NO RESULTS FOR BRAND
           $('#' + brandID + ' > h3').removeClass('hide');
@@ -1093,7 +1094,7 @@ if (currentPage == 'page_search_result') {
             results = regex.exec(location.search);
         return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
       }
-      displayMode = getParameterByName('displayMode');
+      var displayMode = getParameterByName('displayMode');
       //DISPLAY SITE WIDE RESULTS OR BRAND ONLY RESULTS
       if (displayMode == "BrandOnly") {
         $('#brandResults').removeClass('hide');
@@ -1104,10 +1105,10 @@ if (currentPage == 'page_search_result') {
       }
 
       $('body').on('click', 'button.next-page', function () {
-        brandID = $(this).attr('data-brand');
-        pageNumber = parseInt($(this).attr('data-page'));
-        searchTerm = $('#search-term').html(); //LOADS SEARCH TERM
-        systemLanguageDesk = $('#system_language').html(); //LOADS SYSTEM LANGUAGE
+        var brandID = $(this).attr('data-brand'),
+        pageNumber = parseInt($(this).attr('data-page')),
+        searchTerm = $('#search-term').html(), //LOADS SEARCH TERM
+        systemLanguageDesk = $('#system_language').html(), //LOADS SYSTEM LANGUAGE
         searchBrandURL = 'https://' + document.location.host.toString() + '/customer/' + systemLanguageDesk + '/portal/articles/search?q=' + searchTerm + '&page=' + pageNumber + '&b_id=' + brandID + '&t=' + themeID + '&displayMode=BrandOnly';
         //AJAX REQUEST(S)
         $.ajax({
