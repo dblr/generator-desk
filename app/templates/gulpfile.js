@@ -218,7 +218,7 @@ gulp.task('wiredep', () => {
   gulp.src('app/styles/*.scss')
     .pipe($.filter(file => file.stat && file.stat.size))
     .pipe(wiredep({
-      exclude: ['font-awesome'],1
+      exclude: ['font-awesome'],
       ignorePath: /^(\.\.\/)+/
     }))
     .pipe(gulp.dest('app/styles'));
