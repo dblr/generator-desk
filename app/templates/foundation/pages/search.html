@@ -1,7 +1,7 @@
 <!-- build:page_search_result -->
 {% extends "../_layout.html" %}
 {% assign page = 'page_search_result' %}
-{% assign MBSearchPage = true %} 
+{% assign MBSearchPage = true %}
 {% block main %}
 <!-- endbuild -->
 
@@ -19,29 +19,21 @@
             </div>
           </div>
           {% if MBSearchPage == true %}
-          <!-- Start - Dont Edit between these lines -->
-          <div id="siteResults">
-            <div class="body row">
-              <div class="columns medium-12">
-                <ul class="tabs" data-tab role="tablist">
-                </ul>
-                <div class="tabs-content">
+            <!-- Start - Dont Edit between these lines -->
+            <div id="siteResults">
+              <div class="body row">
+                <div class="columns medium-12">
+                  <ul class="tabs" data-tab role="tablist">
+                  </ul>
+                  <div class="tabs-content">
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="body row">
-              <div class="columns medium-12">
-                <div role="tabpanel">
-                  <ul class="nav nav-tabs" data-tab role="tablist"></ul>
-                  <div class="tab-content"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- End - Don't Edit between these lines -->
+            <!-- End - Don't Edit between these lines -->
           {% endif %}
           {% if MBSearchPage == true %}
-          <div id="brandResults" class="hide">
+            <div id="brandResults" class="hide">
           {% endif %}
               {% for result in search_results %}
                 {% if result.class_name == "Article" %}
