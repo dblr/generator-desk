@@ -1,7 +1,9 @@
 <!-- build:page_search_result -->
 {% extends "../_layout.html" %}
 {% assign page = 'page_search_result' %}
+{% assign more_search_block = '<div id="paginate_block"> <br> <div id="results_string"></div><br> <div class="pagination"> <a class="previous_page" href="search.html" rel="prev start">&lt;&lt;</a> <a href="search.html" rel="prev start">1</a> <em class="current">2</em> <a href="search-3.html" rel="next">3</a> <a class="next_page" href="search-3.html" rel="next">&gt;&gt;</a> </div> </div>' %}
 {% assign MBSearchPage = false %}
+
 {% block main %}
 <!-- endbuild -->
 
@@ -36,7 +38,7 @@
             <div id="brandResults" class="hide">
           {% endif %}
             <div class="body">
-              {% for result in search_results limit:10 %}
+              {% for result in search_results offset:10 %}
                 {% if result.class_name == "Article" %}
                   <article class="row result article">
                     <div class="columns medium-12">
