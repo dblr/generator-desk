@@ -123,6 +123,7 @@ module.exports = class extends Generator {
       this.destinationPath('gulpfile.js'), {
         date: (new Date).toISOString().split('T')[0],
         name: this.pkg.name,
+        urlpath: this.urlpath,
         version: this.pkg.version,
         includeBootstrap: this.includeBootstrap,
         startingPoint: this.startingPoint,

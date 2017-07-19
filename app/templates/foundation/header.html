@@ -1,0 +1,73 @@
+{% if desk.apps.get_satisfaction.enabled %}
+{{ gsinit }}
+{% endif %}
+
+{% if favicon.size > 0 %}
+<link rel="SHORTCUT ICON" type='image/ico' href='{{favicon}}' />
+<link rel="icon" type='image/png' href='{{favicon}}' />
+{% else %}
+<link rel="icon" type='image/vnd.microsoft.icon' href='{{ "/favicon.ico" | portal_image_url: image_asset_host }}' />
+<link rel="icon" type='image/png' href='{{ "/favicon.png" | portal_image_url: image_asset_host }}' />
+{% endif %}
+<title>
+  {{ site.company_name }} |
+  {% case page %}
+  {% when 'page_index' %}
+    {{desk.system.snippets.portal_title}}
+  {% when 'page_search_result' %}
+    {{desk.system.snippets.search_results}}
+  {% when 'page_topic' %}
+    {{ topic.name | clip:40 }}
+  {% when 'page_article' %}
+    {{ article.subject_plain | clip:40 }}
+  {% when 'question_new' or 'question_pre_create' %}
+    {{desk.system.snippets.post_public_question}}
+  {% when 'question_show' %}
+    {{ question.subject_plain | clip:40 }}
+  {% when 'email_new' or 'email_pre_create' %}
+    {{desk.system.snippets.email_us}}
+  {% when 'email_submitted' %}
+    {{desk.system.snippets.email_sent}}
+  {% when 'chat_new' or 'chat_pre_create' %}
+    {{desk.system.snippets.live_chat}}
+  {% when 'myportal_index' %}
+    {{desk.system.snippets.my_cases}}
+  {% when 'myportal_show' %}
+    {{desk.page.content.case.subject | clip:40 }}
+  {% when 'login' %}
+    {{desk.system.snippets.login_title}}
+  {% when 'registration' %}
+    {{desk.system.snippets.registration_title}}
+  {% when 'forgot_password' %}
+    {{desk.system.snippets.password_reset_title}}
+  {% when 'myaccount' %}
+    {{desk.system.snippets.account_title}}
+  {% when 'authentication_verification' %}
+    {{desk.system.snippets.auth_verification_title}}
+  {% when 'customer_feedback' %}
+    {{desk.system.snippets.customer_feedback_title}}
+  {% when 'customer_feedback_completed' %}
+    {{desk.system.snippets.customer_feedback_title}}
+  {% endcase %}
+</title>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+{% if page == 'page_article' %}
+<meta property="og:title" content="{{ article.subject_plain | clip:40 }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="{{ site.company_name }}"/>
+<meta property="og:description" content="{{ article.body_text | clip: 120}}"/>
+{% endif %}
+
+{% if page == 'page_topic' %}
+  {% if site.questions_enabled_config and topic.question_count > 0 and topic.allow_questions %}
+  <link rel="alternate" type="application/rss+xml" title="{{ topic.name | clip:40 }} - Questions (RSS 2.0)" href="{{ topic.public_url }}/questions.rss" />
+  {% endif %}
+  {% if topic.article_count > 0 %}
+  <link rel="alternate" type="application/rss+xml" title="{{ topic.name | clip:40 }} - Articles (RSS 2.0)" href="{{ topic.public_url }}/articles.rss" />
+  {% endif %}
+{% endif %}
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<style>

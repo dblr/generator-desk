@@ -244,11 +244,15 @@ gulp.task('default', () => {
 // Desk Related Functionality
 gulp.task('header', function() {
     gulp.src(['app/header.html'])
-        .pipe(liquify(locals, {
-            filters: customFilters
+        .pipe(replace({
+          patterns: [
+            {
+              match: /<style>/g,
+              replacement: '<link href="<%= urlpath %>/styles/main.css" rel="stylesheet"/>'
+            }
+          ]
         }))
         .pipe(gulp.dest('dist'))
-        .pipe(reload({ stream: true }));
 });
 gulp.task('cleanup', function () {
   gulp.src('app/_layout.html')
@@ -258,7 +262,6 @@ gulp.task('cleanup', function () {
             /<link/i,
             /<meta/i,
             /<html/i,
-            /<.html/i,
             /<.head>/g,
             /<head>/g,
             /<body/i,
@@ -279,6 +282,9 @@ gulp.task('cleanup', function () {
         {
           match: /{% block main %}\n{% endblock %}/g,
           replacement: fs.readFileSync('.tmp/body.liquid', 'utf8')
+        },{
+          match: /<.html>/g,
+          replacement: '<script src="<%= urlpath %>/scripts/main.js" type"text/javascript"></script>'
         }
       ]
     }))
@@ -459,7 +465,7 @@ gulp.task('inner-pages', function() {
 });
 
 gulp.task('desk', function(done) {
-    runSequence('inner-pages', 'body', 'layout', 'cleanup', function() {
+    runSequence('inner-pages', 'body', 'layout', 'cleanup', 'header', function() {
         done();
         console.log('Body, Scripts and Styles are now ready for your Desk.com site');
     });
