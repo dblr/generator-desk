@@ -177,8 +177,8 @@ gulp.task('serve', () => {
       '.tmp/fonts/**/*'
     ]).on('change', reload);
     gulp.watch(['app/pages/*.html', 'app/widgets/*.html', 'app/*.html'], ['templates','widgets']).on('change', reload);
-    gulp.watch('app/styles/**/*.', ['styles']);
-    gulp.watch('app/scripts/**/*.js', ['scripts']);
+    gulp.watch('app/styles/*.*', ['styles']);
+    gulp.watch('app/scripts/*.*', ['scripts']);
     gulp.watch('app/fonts/**/*', ['fonts']);
     gulp.watch('bower.json', ['wiredep', 'fonts']);
   });
