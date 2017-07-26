@@ -1346,10 +1346,10 @@ if (currentPage == 'page_search_result') {
         }
 
        $('body').on('click', 'button.next-page', function () {
-          brandID = $(this).attr('data-brand');
-          pageNumber = parseInt($(this).attr('data-page'));
-          searchTerm = $('#search-term').html(); //LOADS SEARCH TERM
-          systemLanguageDesk = $('#system_language').html(); //LOADS SYSTEM LANGUAGE
+          var brandID = $(this).attr('data-brand'),
+          pageNumber = parseInt($(this).attr('data-page')),
+          searchTerm = $('#search-term').html(), //LOADS SEARCH TERM
+          systemLanguageDesk = $('#system_language').html(), //LOADS SYSTEM LANGUAGE
           searchBrandURL = 'https://'+document.location.host.toString()+'/customer/'+systemLanguageDesk+'/portal/articles/search?q='+searchTerm+'&page='+pageNumber+'&b_id='+brandID+'&displayMode=BrandOnly'
           //AJAX REQUEST(S)
             $.ajax({

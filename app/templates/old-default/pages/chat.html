@@ -1,0 +1,87 @@
+<!-- build:chat_new -->
+{% extends "../_layout.html" %}
+{% assign page = 'chat_new' %}
+{% assign MBArticleSuggest = true %}
+{% assign form_begin = "<form action='/chat-precreate.html' enctype='multipart/form-data' class='new_email' id='new_email' method='go' novalidate='novalidate'>" %}
+{% block main %}
+<!-- endbuild -->
+
+
+<div id="desk-external-variables-chat_new" class="desk-external-variables">
+  <div id="system-snippets-name_required">{{system.snippets.name_required}}</div>
+  <div id="system-snippets-email_required">{{system.snippets.email_required}}</div>
+  <div id="system-snippets-invalid_email">{{system.snippets.invalid_email}}</div>
+  <div id="system-snippets-question_required">{{system.snippets.question_required}}</div>
+  <div id="system-snippets-exceeding_max_chars">{{system.snippets.exceeding_max_chars}}</div>
+</div>
+
+<div id='breadcrumbs'>
+  <a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> &rsaquo; {{system.snippets.live_chat}}
+</div>
+<div id='support-main'>
+  <div class='support-body'>
+    <div class='content'>
+      <h3>{{system.snippets.live_chat}}</h3>
+      <div id='form'>
+        {{form_begin}}
+          {% if current_user == nil or current_user.is_guest %}
+            <div class='input-block'>
+              <span class='label'>
+                {{system.snippets.your_name}} <span>({{system.snippets.required}})</span>
+              </span>
+              <div>
+                <input value='{{ interaction.name }}' id='interaction_name' maxlength='100' name='interaction[name]' type='text' />
+              </div>
+            </div>
+            <div class='input-block'>
+              <span class='label'>
+                {{system.snippets.your_email}} <span>({{system.snippets.required}})</span>
+              </span>
+              <div>
+                <input value='{{ interaction.email }}' id='interaction_email' maxlength='100' name='interaction[email]' type='text' />
+              </div>
+            </div>
+          {% endif %}
+          <div class='input-block'>
+            <span class='label'>
+              {{system.snippets.question}} <span>({{system.snippets.required}})</span>
+            </span>
+            <div>
+              <textarea id='chat_subject' name='chat[subject]'>{% if search_term and search_term != '' %}{{search_term}}{% else %}{{chat.subject}}{%endif%}</textarea>
+            </div>
+          </div>
+          <div class='input-button'>
+            <input id='chat_submit' name='commit' type='submit' value='{{system.snippets.go_chat}}' />
+            <img alt='Ajax-loader-small' id='chat_submit_spinner' src='{{ "/images/ajax-loader-small.gif" | portal_image_url: image_asset_host }}' style='display: none; margin: 7px 0 0 5px; position: absolute;' />
+          </div>
+        {{form_end}}
+      </div>
+    </div>
+  </div>
+  <!--
+  ***************
+  The following attribution needs to remain as is in terms of wording with the appropriate link back to desk.com as per our terms of service: http://www.desk.com/terms
+  If you would like, you may change the location or the styling to better match your site, but the content and the link must remain in the template and visible to end users.
+  ****************
+  -->
+  <div id='footer'>
+    {{ desk.page.theme.footer_content }}
+    {% if site.seo_footer %}
+      <div class="powered_by_desk powered_by_desk_v2">Powered By
+        <a class="powered_by_logo powered_by_logo_v2" href="http://www.desk.com">
+          <div>Desk.com</div><div> Customer Service and Helpdesk Ticket Software</div></a>
+      </div>
+    {% else %}
+      <div class="powered_by_desk">
+        <a href='http://www.desk.com'><div class="powered_by_logo"></div></a>
+        Powered by &nbsp;Desk.com
+      </div>
+    {% endif %}
+  </div>
+</div>
+<script type="text/javascript" src="{{desk_javascript_host}}portal/desk.portal.body.chat_new.js"></script>
+
+
+<!-- build:endblock -->
+{% endblock %}
+<!-- endbuild -->

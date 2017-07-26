@@ -1,0 +1,83 @@
+<!-- build:page_article -->
+{% extends "../_layout.html" %}
+{% assign page = 'page_article' %}
+{% block main %}
+<!-- endbuild -->
+
+
+<div id='breadcrumbs'>
+  <a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a>
+  {% if article %}
+  &rsaquo; <a href='{{ topic.public_articles_url }}'>{{ topic.name | clip:30 }}</a> &rsaquo; {{ article.subject_plain | clip:30 }}
+  {% endif %}
+</div>
+
+<div id='support-main'>
+
+  <div class='support-body'>
+    <div id='social-share'>
+      <div class='share-btn'>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-count="vertical">{{system.snippets.tweet}}</a>
+      </div>
+      <div class='share-btn'>
+        <div class="fb-like" data-send="false" data-layout="box_count" data-width="100" data-show-faces="false"></div>
+      </div>
+      <div class='share-btn'>
+        <g:plusone size="tall"></g:plusone>
+      </div>
+    </div>
+
+    <div class='content article'>
+    {% if article == null %}
+      <h3>{{system.snippets.article_translation_missing}} {{system.language_name_localized}}</h3>
+    {% else %}
+      <div class='title'>
+        <h3>{{ article.subject_plain }}</h3>
+        <div class='meta'>{{system.snippets.last_update}}: {{ article.updated_at | in_time_zone: site.timezone | date: '%b %d, %Y %I:%M%p %Z' }}</div>
+      </div>
+
+      <div class='article-content'>
+        {{ article.body }}
+      </div>
+
+      {% if article.number_of_attachments > 0 %}
+        <div id='attachments'>
+          <strong>{{system.snippets.attachments}}</strong>
+          <ul>
+            {% for attachment in article.kb_article_attachments %}
+              <li>
+                <a href="{{ attachment.faq_download_url }}" class="kb_article_attachment_a" target="_blank">{{ attachment.name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+      {{ rate_block }}
+    {% endif %}
+    </div>
+  </div>
+  <!--
+  ***************
+  The following attribution needs to remain as is in terms of wording with the appropriate link back to desk.com as per our terms of service: http://www.desk.com/terms
+  If you would like, you may change the location or the styling to better match your site, but the content and the link must remain in the template and visible to end users.
+  ****************
+  -->
+  <div id='footer'>
+    {{ desk.page.theme.footer_content }}
+    {% if site.seo_footer %}
+      <div class="powered_by_desk powered_by_desk_v2">Powered By
+        <a class="powered_by_logo powered_by_logo_v2" href="http://www.desk.com">
+          <div>Desk.com</div><div> Customer Service and Helpdesk Ticket Software</div></a>
+      </div>
+    {% else %}
+      <div class="powered_by_desk">
+        <a href='http://www.desk.com'><div class="powered_by_logo"></div></a>
+        Powered by &nbsp;Desk.com
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- build:endblock -->
+{% endblock %}
+<!-- endbuild -->

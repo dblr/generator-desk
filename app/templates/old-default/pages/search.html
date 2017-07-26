@@ -1,0 +1,105 @@
+<!-- build:page_search_result -->
+{% extends "../_layout.html" %}
+{% assign page = 'page_search_result' %}
+{% assign MBSearchPage = true %}
+{% block main %}
+<!-- endbuild -->
+
+
+<div id="desk-external-variables-page_search_result" class="desk-external-variables">
+  <div id="search_term">{{ search_term }}</div>
+</div>
+
+<div style="display:none" id="search_term">{{ search_term }}</div>
+<div id='breadcrumbs'>
+  <a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> &rsaquo; {{system.snippets.search}}
+</div>
+<div id='support-main'>
+  <div class='support-body'>
+    <div class='content articles'>
+      <h3>{{ number_search_results }} {{system.snippets.results_found_for}} "{{ search_term }}"</h3>
+      <ul id='search-results'>
+        {% for result in search_results %}
+          <li class='{% if result.class_name == "Question" and result.featured? == false %}question{% elsif result.class_name == "Question" and result.featured? %}question featured{% elsif result.class_name == "Article" %}article{% endif %}'>
+            <h4>
+              <a href='{{ result.public_url }}'>{{ result.subject_plain | clip:70 }}</a>
+            </h4>
+            <p>{{ result.body_plain | clip:110 }}</p>
+            <div class='meta'>
+              {% if result.class_name == 'Article' %}
+                {{ result.updated_at | in_time_zone: site.timezone | date: '%b %d, %Y %I:%M%p %Z' }}
+              {% else %}
+                {% if result.answers_agent_count > 0 %}
+                  <span class='answered'>
+                    {{ result.answers_agent_count }}
+                    {{ site.agent_name_config }}
+                    {{ system.snippets.answer | pluralize: result.answers_agent_count, system.snippets.answers }}
+                  </span>
+                {% endif %}
+                <span class='count'>
+                  {{ result.answers_customer_count }}
+                  Community {{ system.snippets.answer | pluralize: result.answers_customer_count, system.snippets.answers }}
+                </span>
+                <span>
+                  {{ result.updated_at | in_time_zone: site.timezone | date: '%b %d, %Y %I:%M%p %Z' }}
+                </span>
+              {% endif %}
+            </div>
+          </li>
+        {% endfor %}
+        {% if number_search_results == 0 %}
+          <li class='notice'>
+            <h4>
+              {{system.snippets.sorry_try_another_search}}
+              <a href='{{desk.system.links.email}}'>{{system.snippets.send_us_an_email}}</a>.
+            </h4>
+          </li>
+        {% endif %}
+      </ul>
+      <div id='pagination'>
+        {{ more_search_block }}
+      </div>
+    </div>
+
+  <!-- GS -->
+  {% if desk.apps.get_satisfaction.enabled %}
+    <div class='support-body'>
+      <div class='content articles'>
+        <div id="gs_search_title">
+          <img alt='Ajax-loader-small' id='question_submit_spinner' src='{{ "/images/ajax-loader-small.gif" | portal_image_url: image_asset_host }}' style='display:block;margin:auto;' />
+        </div>
+        <div id='gs_search_results'></div>
+      </div>
+    </div>
+  {% endif %}
+  <!-- GS -->
+
+  </div>
+
+  <!--
+  ***************
+  The following attribution needs to remain as is in terms of wording with the appropriate link back to desk.com as per our terms of service: http://www.desk.com/terms
+  If you would like, you may change the location or the styling to better match your site, but the content and the link must remain in the template and visible to end users.
+  ****************
+  -->
+  <div id='footer'>
+    {{ desk.page.theme.footer_content }}
+    {% if site.seo_footer %}
+      <div class="powered_by_desk powered_by_desk_v2">Powered By
+        <a class="powered_by_logo powered_by_logo_v2" href="http://www.desk.com">
+          <div>Desk.com</div><div> Customer Service and Helpdesk Ticket Software</div></a>
+      </div>
+    {% else %}
+      <div class="powered_by_desk">
+        <a href='http://www.desk.com'><div class="powered_by_logo"></div></a>
+        Powered by &nbsp;Desk.com
+      </div>
+    {% endif %}
+  </div>
+</div>
+<script type="text/javascript" src="{{desk_javascript_host}}portal/desk.portal.body.page_search_result.js"></script>
+
+
+<!-- build:endblock -->
+{% endblock %}
+<!-- endbuild -->

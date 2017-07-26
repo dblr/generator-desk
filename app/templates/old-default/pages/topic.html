@@ -1,0 +1,110 @@
+<!-- build:page_topic -->
+{% extends "../_layout.html" %}
+{% assign type = 'articles' %}
+{% assign page = 'page_topic' %}
+{% block main %}
+<!-- endbuild -->
+
+
+<div id='breadcrumbs'>
+  <a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a>
+  {% if topic %}
+  &rsaquo; {{ topic.name }}
+  {% endif %}
+</div>
+<div id='support-main'>
+  <div class='support-body'>
+    <div class='content articles'>
+    {% if topic == null %}
+      <h3>{{system.snippets.topic_translation_missing}} {{system.language_name_localized}}</h3>
+    {% else %}
+      <div id='toggle'>
+        <h3>{{ topic.name }}</h3>
+        <div>
+          {% if topic.article_count > 0 %}
+            {% if type == 'articles' %}
+              <a href='{{ topic.public_articles_url }}' class='active'>{{system.snippets.articles}}</a>
+            {% else %}
+              <a href='{{ topic.public_articles_url }}'>{{system.snippets.articles}}</a>
+            {% endif %}
+          {% endif %}
+          {% if topic.question_exists and topic.allow_questions and portal.questions_enabled %}
+            {% if type == 'questions' %}
+              <a href='{{ topic.public_questions_url }}' class='active'>{{system.snippets.questions}}</a>
+            {% else %}
+              <a href='{{ topic.public_questions_url }}'>{{system.snippets.questions}}</a>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+      <ul>
+        {% if type == 'articles' %}
+          {% for article in articles %}
+            <li class='article'>
+              <h4>
+                <a href='{{ article.public_url }}'>{{ article.subject_plain | clip:70 }}</a>
+              </h4>
+              <p>{{ article.body_plain | clip:110 }}</p>
+              <div class='meta'>
+                {{ article.updated_at | in_time_zone: site.timezone | date: '%b %d, %Y %I:%M%p %Z' }}
+              </div>
+            </li>
+          {% endfor %}
+        {% else %}
+          {% for question in questions %}
+            <li class='question{% if question.featured? %} featured{% endif %}'>
+              <h4>
+                <a href='{{ question.public_url }}'>{{ question.subject_plain | clip:70 }}</a>
+              </h4>
+              <p>{{ question.body_plain | clip:110 }}</p>
+              <div class='meta'>
+                {% if question.answers_agent_count > 0 %}
+                  <span class='answered'>
+                    {{ question.answers_agent_count }}
+                    {{ site.agent_name_config }}
+                    {{ system.snippets.answer | pluralize: question.answers_agent_count, system.snippets.answers }}
+                  </span>
+                {% endif %}
+                <span class='count'>
+                  {{ question.answers_customer_count }}
+                  {{ system.snippets.community_answer | pluralize: question.answers_customer_count, system.snippets.community_answers }}
+                </span>
+                <span>
+                  {{ question.created_at | in_time_zone: site.timezone | date: '%b %d, %Y %I:%M%p %Z' }}
+                </span>
+              </div>
+            </li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+      <div id='pagination'>
+        {{ more_article_block }}
+      </div>
+    {% endif %}
+    </div>
+  </div>
+  <!--
+  ***************
+  The following attribution needs to remain as is in terms of wording with the appropriate link back to desk.com as per our terms of service: http://www.desk.com/terms
+  If you would like, you may change the location or the styling to better match your site, but the content and the link must remain in the template and visible to end users.
+  ****************
+  -->
+  <div id='footer'>
+    {{ desk.page.theme.footer_content }}
+    {% if site.seo_footer %}
+      <div class="powered_by_desk powered_by_desk_v2">Powered By
+        <a class="powered_by_logo powered_by_logo_v2" href="http://www.desk.com">
+          <div>Desk.com</div><div> Customer Service and Helpdesk Ticket Software</div></a>
+      </div>
+    {% else %}
+      <div class="powered_by_desk">
+        <a href='http://www.desk.com'><div class="powered_by_logo"></div></a>
+        Powered by &nbsp;Desk.com
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- build:endblock -->
+{% endblock %}
+<!-- endbuild -->

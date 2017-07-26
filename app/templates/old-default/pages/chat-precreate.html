@@ -1,0 +1,140 @@
+<!-- build:chat_pre_create -->
+{% extends "../_layout.html" %}
+{% assign page = 'chat_pre_create' %}
+{% assign form_begin = "<form action='/' enctype='multipart/form-data' class='new_email' id='new_email' method='go' novalidate='novalidate'>" %}
+{% block main %}
+<!-- endbuild -->
+
+
+<div id="desk-external-variables-chat_pre_create" class="desk-external-variables">
+  <div id="search_term">{{search_term}}</div>
+  <div id="number_search_results">{{number_search_results}}</div>
+  <div id="system-snippets-name_required">{{system.snippets.name_required}}</div>
+  <div id="system-snippets-email_required">{{system.snippets.email_required}}</div>
+  <div id="system-snippets-invalid_email">{{system.snippets.invalid_email}}</div>
+  <div id="system-snippets-question_required">{{system.snippets.question_required}}</div>
+  <div id="system-snippets-exceeding_max_chars">{{system.snippets.exceeding_max_chars}}</div>
+</div>
+
+<div id='breadcrumbs'>
+  <a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> &rsaquo; {{system.snippets.live_chat}}
+</div>
+<div id='support-main'>
+  <div id="modal-screen">&nbsp;</div>
+  <div id="modal">
+    <div class="inner articles">
+      <div class="close">
+        <a href="/" class="onclick-go-back">
+          <img src='{{ "/images/fancybox/fancybox_close.png" | portal_image_url: image_asset_host }}' alt='close'>
+        </a>
+      </div>
+      <div class="main">
+        {% if number_search_results > 0 %}
+          <h1>{{system.snippets.not_started_chat_yet}}</h1>
+          <p class="subheader">{{system.snippets.article_help}}</p>
+          <ul id='search-results' class='condensed'>
+            {% for result in search_results limit:3 %}
+              <li class='{% if result.class_name == "Question" and result.featured? == false %}question{% elsif result.class_name == "Question" and result.featured? %}question featured{% elsif result.class_name == "Article" %}article{% endif %}'>
+                <h4>
+                  <a href='{{ result.public_url }}' target='_blank'>
+                    {{ result.subject_plain | clip:70 }}
+                  </a>
+                </h4>
+                <p>
+                  {{ result.body_plain | clip:105 }}
+                </p>
+              </li>
+            {% endfor %}
+            <li class="note">
+              ({{system.snippets.click_open_window}})
+            </li>
+          </ul>
+          <div id='form'>
+            {{form_begin}}
+              <div class='input-button'>
+                {{system.snippets.did_not_help}}
+                <input id='chat_submit' name='commit' type='submit' value='{{system.snippets.start_chat}}' />
+                <img alt='Ajax-loader-small' id='chat_submit_spinner' src='{{ "/images/ajax-loader-small.gif" | portal_image_url: image_asset_host }}' style='display: none; margin: 7px 0 0 5px; position: absolute;' />
+              </div>
+            {{form_end}}
+          </div>
+        {% else %}
+          <h1>{{system.snippets.chat_room_ready}}</h1>
+          <p class="subheader">{{system.snippets.click_button_chat}}</p>
+          <div id='form'>
+            {{form_begin}}
+              <div class='input-button'>
+                <input id='chat_submit' name='commit' type='submit' value='{{system.snippets.start_chat}}' />
+              </div>
+            {{form_end}}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class='support-body'>
+    <div class='content'>
+      <h3>{{system.snippets.live_chat}}</h3>
+      <div id='form'>
+        {{form_begin}}
+          {% if current_user == nil or current_user.is_guest %}
+            <div class='input-block'>
+              <span class='label'>
+                {{system.snippets.your_name}} <span>({{system.snippets.required}})</span>
+              </span>
+              <div>
+                <input value='{{ interaction.name }}' id='interaction_name' maxlength='100' name='interaction[name]' type='text' />
+              </div>
+            </div>
+            <div class='input-block'>
+              <span class='label'>
+                {{system.snippets.your_email}} <span>({{system.snippets.required}})</span>
+              </span>
+              <div>
+                <input value='{{ interaction.email }}' id='interaction_email' maxlength='100' name='interaction[email]' type='text' />
+              </div>
+            </div>
+          {% endif %}
+          <div class='input-block'>
+            <span class='label'>
+              {{system.snippets.question}} <span>({{system.snippets.required}})</span>
+            </span>
+            <div>
+              <textarea id='chat_subject' name='chat[subject]'>{% if search_term and search_term != '' %}{{search_term}}{% else %}{{chat.subject}}{%endif%}</textarea>
+            </div>
+          </div>
+          <div class='input-button'>
+            <input id='chat_submit' name='commit' type='submit' value='{{system.snippets.go_chat}}' />
+          </div>
+        {{form_end}}
+      </div>
+    </div>
+  </div>
+  <!--
+  ***************
+  The following attribution needs to remain as is in terms of wording with the appropriate link back to desk.com as per our terms of service: http://www.desk.com/terms
+  If you would like, you may change the location or the styling to better match your site, but the content and the link must remain in the template and visible to end users.
+  ****************
+  -->
+  <div id='footer'>
+    {{ desk.page.theme.footer_content }}
+    {% if site.seo_footer %}
+      <div class="powered_by_desk powered_by_desk_v2">Powered By
+        <a class="powered_by_logo powered_by_logo_v2" href="http://www.desk.com">
+          <div>Desk.com</div><div> Customer Service and Helpdesk Ticket Software</div></a>
+      </div>
+    {% else %}
+      <div class="powered_by_desk">
+        <a href='http://www.desk.com'><div class="powered_by_logo"></div></a>
+        Powered by &nbsp;Desk.com
+      </div>
+    {% endif %}
+  </div>
+</div>
+<script type="text/javascript" src="{{desk_javascript_host}}portal/desk.portal.body.chat_pre_create.js"></script>
+
+
+
+<!-- build:endblock -->
+{% endblock %}
+<!-- endbuild -->

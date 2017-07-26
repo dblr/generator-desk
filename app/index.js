@@ -62,16 +62,19 @@ module.exports = class extends Generator {
       name: 'startingPoint',
       message: 'Which version of Bootstrap would you like to include?',
       choices: [{
+        name: 'Old Default',
+        value: 'v4'
+      },{
         name: 'v5 - Respnsive Template (Desk default)',
         value: 'bootStrap'
       }, {
         name: 'Foundation - Starting point based off Foundation v5.3 framework',
         value: 'foundationFive'
       }, {
-        name: 'Boot Strap 4 - Not yet available',
+        name: 'Boot Strap 4 - soon',
         value: 'bootStrapFour'
       }, {
-        name: 'Foundation 6 - Not yet available',
+        name: 'Foundation 6 - soon',
         value: 'foundationSix'
       }],
     }];
@@ -235,6 +238,37 @@ module.exports = class extends Generator {
         }
       );
     }
+    // v4 - Old Desk.com Default Theme
+    if (this.startingPoint == 'v4') {
+      bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
+      bsPlugins = [
+        'affix',
+        'alert',
+        'dropdown',
+        'tooltip',
+        'modal',
+        'transition',
+        'button',
+        'popover',
+        'carousel',
+        'scrollspy',
+        'collapse',
+        'tab'
+      ];
+      this.fs.copyTpl(
+        this.templatePath('old-default/'),
+        this.destinationPath('app/'), {
+          appname: this.appname,
+          includeSass: this.includeSass,
+          startingPoint: this.startingPoint,
+          includeModernizr: this.includeModernizr,
+          includeJQuery: this.includeJQuery,
+          bsPath: bsPath,
+          bsPlugins: bsPlugins
+        }
+      );
+    }
+    // v5 - Bootstrap based "v5" theme
     if (this.startingPoint == 'bootStrap') {
       bsPath = '/bower_components/bootstrap-sass/assets/javascripts/bootstrap/';
       bsPlugins = [

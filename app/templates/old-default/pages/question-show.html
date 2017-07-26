@@ -1,0 +1,229 @@
+<!-- build:question_show -->
+{% extends "../_layout.html" %}
+{% assign page = 'question_show' %}
+{% block main %}
+{% assign customer_answer_count = question.answers_customer_count %}
+{% assign agent_answer_count = question.answers_agent_count %}
+{% assign answers_count = question.answers_count %}
+{% assign best_answer = question.best_answer %}
+<!-- endbuild -->
+
+
+<div id="desk-external-variables-question_show" class="desk-external-variables">
+  <div id="system-snippets-just_moderated">{{just_moderated}}</div>
+  <div id="system-snippets-name_required">{{system.snippets.name_required}}</div>
+  <div id="system-snippets-email_required">{{system.snippets.email_required}}</div>
+  <div id="system-snippets-invalid_email">{{system.snippets.invalid_email}}</div>
+  <div id="system-snippets-answer_required">{{system.snippets.answer_required}}</div>
+  <div id="system-snippets-exceeding_max_chars">{{system.snippets.exceeding_max_chars}}</div>
+</div>
+
+{% assign customer_answer_count = question.answers_customer_count %}
+{% assign agent_answer_count = question.answers_agent_count %}
+{% assign answers_count = question.answers_count %}
+{% assign best_answer = question.best_answer %}
+<div id='breadcrumbs'>
+  <a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> &rsaquo; <a href='{{ question.topic.public_questions_url }}'>{{ question.topic.name  | clip:30 }}</a> &rsaquo; {{ question.subject | clip:30 }}
+</div>
+<div id='support-main'>
+  {% if just_moderated %}
+    <div id="modal-screen">&nbsp;</div>
+    <div id="modal">
+      <div class="inner">
+        <div class="main">
+          <h1>{{system.snippets.your_post_submitted}}</h1>
+          <p class='subheader'>
+            {{system.snippets.not_shown_until_reviewed}}
+          </p>
+          <div id='form'>
+            <div class='input-button'>
+              <input id='moderation_okay_button'  name='commit' type='submit'  value='{{system.snippets.okay}}' />
+              <img alt='Ajax-loader-small' id='question_submit_spinner' src='{{ "/images/ajax-loader-small.gif" | portal_image_url: image_asset_host }}' style='display: none; margin: 7px 0 0 5px; position: absolute;'/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div class='support-body'>
+    <div class='content question'>
+      <div class='question-body'>
+        <span class='gravatar-wrapper'>
+          {{ question.from_email | gravatar_image: gravatar_unknown_user, ssl }}
+        </span>
+        <div class='question-details'>
+          <h3>{{ question.subject }}</h3>
+          <div class='meta'>
+            <span class='name'>
+              {{ question.from_name }}
+            </span>
+            <span>
+              {{ question.created_at | in_time_zone: site.timezone | date: '%b %d, %Y %I:%M%p %Z' }}
+            </span>
+          </div>
+          <p>{{ question.body }}</p>
+          {% if best_answer != nil %}
+          <h4 id='question-best-answer-heading'>
+            {{ answers_count }}
+            {{ system.snippets.community_answer | pluralize: answer_count, system.snippets.community_answers }}
+          </h4>
+        {% endif %}
+        </div>
+        {% if best_answer != nil %}
+          <div id='question-best-answer'>
+            <div class='reply'>
+              <span class='best-answer-green'>
+                {{system.snippets.best_answer}}
+              </span>
+              <span class='gravatar-wrapper'>
+                {{ best_answer.from_email | gravatar_image: gravatar_unknown_user,  ssl }}
+              </span>
+              <div class='answer-details'>
+                <div class='meta'>
+                  <span>
+                    {{ best_answer.from_name }}
+                  </span>
+                  <span class="date">
+                    {{ best_answer.updated_at | in_time_zone: site.timezone | date: '%b %d, %Y %I:%M%p %Z' }}
+                  </span>
+                </div>
+                <p>{{ best_answer.body }}</p>
+                {% if question.answers_count > 1 %}
+                    <p>
+                    <span>
+                      <a href="#best-answer-conversation">
+                        {{system.snippets.view_conversation}}
+                      </a>
+                    </span>
+                  </p>
+                {% endif %}
+              </div>
+            </div>
+            <br/>
+          </div>
+          {% endif %}
+      </div>
+      {% if question.non_best_answers_exist %}
+        <div class='replies'>
+          {% for answer in question.answers %}
+            <div class='reply'>
+               {% if current_user == answer.user %}
+                <div class='answer-rating rating-true'>
+                  <div>
+                    <span class='score {% if answer.rating_value > 0 %}score-positive{% elsif answer.rating_value < 0 %}score-negative{% endif %}' id='score-{{answer.id}}'>{{ answer.rating_value }}</span>
+                    <span class='dialog'>{{system.snippets.score}}</span>
+                  </div>
+                </div>
+              {% else %}
+                <div class='answer-rating rating-{{ answer | already_rated_by_user: current_user }}'>
+                  <div>
+                    {{ answer | already_rated_up: current_user }}
+                    <span class='score {% if answer.rating_value > 0 %}score-positive{% elsif answer.rating_value < 0 %}score-negative{% endif %}' id='score-{{answer.id}}'>{{ answer.rating_value }}</span>
+                    <span class='dialog'>{{system.snippets.rated}}</span>
+                    {{ answer | already_rated_down: current_user }}
+                  </div>
+                </div>
+              {% endif %}
+              <span class='gravatar-wrapper'>
+                {{ answer.from_email | gravatar_image: gravatar_unknown_user,   ssl }}
+              </span>
+              <div class='answer-details'>
+                <div class='meta'>
+                  <span>
+                    {{ answer.from_name }}
+                  </span>
+                  {% if answer.id == best_answer.id %}
+                      <span class='best-answer-green'>
+                      <a name="best-answer-conversation">
+                        {{system.snippets.best_answer}}
+                      </a>
+                    </span>
+                  {% endif %}
+                  {% if answer.agent? %}
+                        <span class='date-short'>
+                        {{ answer.updated_at | in_time_zone: site.timezone | date: '%b %d, %Y %I:%M%p %Z' }}
+                    </span>
+                    <span class='agent-answer-label'>
+                      {{ site.company_name }} {{ site.agent_name_config }}
+                    </span>
+                  {% else %}
+                    <span class='date'>
+                      {{ answer.updated_at | in_time_zone: site.timezone | date: '%b %d, %Y %I:%M%p %Z' }}
+                    </span>
+                  {% endif %}
+                </div>
+                <div class="answer-body">{{ answer.body }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if question.allow_answers? != true or question.case.closed? %}
+        <p class='form-notice'>{{system.snippets.question_closed}}</p>
+      {% else %}
+        <div id='form'>
+          <h4>{{system.snippets.post_public_answer}}</h4>
+          <div id='qna-reply-form'>
+            {{ form_begin }}
+              {% if current_user == nil or current_user.is_guest %}
+                <div class='input-block'>
+                  <span class='label'>
+                    {{system.snippets.your_name}} <span>({{system.snippets.required}})</span>
+                  </span>
+                  <div>
+                    <input id='interaction_name' maxlength='100' name='interaction[name]' value='{{ interaction.name }}' type='text' />
+                  </div>
+                </div>
+                <div class='input-block'>
+                  <span class='label'>
+                    {{system.snippets.your_email}} <span>({{system.snippets.required}})</span>
+                  </span>
+                  <div>
+                    <input id='interaction_email' value='{{ interaction.email }}' maxlength='100' name='interaction[email]' size='100' type='text' />
+                  </div>
+                </div>
+              {% endif %}
+              <div class='input-block'>
+                <span class='label'>
+                  {{system.snippets.answer}} <span>({{system.snippets.required}})</span>
+                </span>
+                <div>
+                  <textarea cols='40' id='qna_body' name='qna[body]' rows='20'>{{ qna.body }}</textarea>
+                </div>
+              </div>
+              <div class='input-button'>
+                <input id='answer_submit' name='commit' type='submit' value='{{system.snippets.post_answer}}' />
+              </div>
+            {{ form_end }}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <!--
+  ***************
+  The following attribution needs to remain as is in terms of wording with the appropriate link back to desk.com as per our terms of service: http://www.desk.com/terms
+  If you would like, you may change the location or the styling to better match your site, but the content and the link must remain in the template and visible to end users.
+  ****************
+  -->
+  <div id='footer'>
+    {{ desk.page.theme.footer_content }}
+    {% if site.seo_footer %}
+      <div class="powered_by_desk powered_by_desk_v2">Powered By
+        <a class="powered_by_logo powered_by_logo_v2" href="http://www.desk.com">
+          <div>Desk.com</div><div> Customer Service and Helpdesk Ticket Software</div></a>
+      </div>
+    {% else %}
+      <div class="powered_by_desk">
+        <a href='http://www.desk.com'><div class="powered_by_logo"></div></a>
+        Powered by &nbsp;Desk.com
+      </div>
+    {% endif %}
+  </div>
+</div>
+<script type="text/javascript" src="{{desk_javascript_host}}portal/desk.portal.body.question_show.js"></script>
+
+
+<!-- build:endblock -->
+{% endblock %}
+<!-- endbuild -->

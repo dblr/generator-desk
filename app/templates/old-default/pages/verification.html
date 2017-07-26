@@ -1,0 +1,45 @@
+<!-- build:authentication_verification -->
+{% extends "../_layout.html" %}
+{% assign page = 'authentication_verification' %}
+{% block main %}
+<!-- endbuild -->
+
+
+
+<div id="desk-external-variables-authentication_verification" class="desk-external-variables">
+  <div id="system-snippets-email_required">{{system.snippets.email_required}}</div>
+  <div id="system-snippets-invalid_email">{{system.snippets.invalid_email}}</div>
+</div>
+<div id="notifications">
+</div>
+<div id='breadcrumbs'>
+  <a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> &rsaquo; {{desk.system.snippets.auth_verification_title}}
+</div>
+<div id='support-main'>
+  <div class='support-body'>
+    <div class='content'>
+      <h3 class="verify-title">{{desk.system.snippets.auth_verification_title}}</h3>
+
+      <div id="verification_step_1">
+        <div id='form' class='authentication_verification-form'>
+        {{desk.page.content.form}}
+      </div>
+      <div id="authentication-verification-copy">
+        <p>{{desk.system.snippets.authentication_verification_msg}}{% if twitter_screen_name != nil %} @{{twitter_screen_name}}{% endif %}!</p>
+        <p>{{desk.system.snippets.authentication_verification_note}}</p>
+      </div>
+      </div>
+
+      <div id="verification_step_2">
+        <p>{{verification_initiation_success}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="{{desk_javascript_host}}portal/desk.portal.private.authenication.verifications_new.js"></script>
+
+
+
+<!-- build:endblock -->
+{% endblock %}
+<!-- endbuild -->

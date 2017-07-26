@@ -1,0 +1,196 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= appname %></title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="/bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body>
+
+    <div id='company-support-portal'>
+      <div id='company-header'>
+        <div class='wrapper'>
+          {{ desk.page.theme.header_content }}
+          {% if portal.authentication_enabled and page != 'customer_feedback' and page != 'customer_feedback_completed' and page != 'customer_feedback_invalid' %}
+            <div id='customer-account'>
+              {% if current_user and current_user.is_guest == false %}
+                <span>
+                  {{system.snippets.welcome}} {{ current_user.customer.name }}
+                </span>
+                {% if site.myportal_enabled %}
+                  <a href='{{ desk.system.links.myportal }}'>{{system.snippets.my_cases}}</a>
+                {% endif %}
+                {% if site.portal_authentication_type_config == 'desk' %}
+                  <a href='{{ desk.system.links.myaccount }}'>{{system.snippets.my_account}}</a>
+                {% endif %}
+                {% if site.portal_logout_enabled_config %}
+                  <a href='{{ site.authentication_logout_url }}'>{{system.snippets.logout}}</a>
+                {% endif %}
+              {% else %}
+                <span>
+                  {{system.snippets.welcome_guest}}
+                </span>
+                <a href='{{ site.authentication_login_url }}'>{{system.snippets.login}}</a>
+              {% endif %}
+            </div>
+          {% endif %}
+          <div style="float:right">{{langs_list}}</div>
+          <div style="clear:both"></div>
+        </div>
+      </div>
+      {% if page != 'customer_feedback' and page != 'customer_feedback_completed' and page != 'customer_feedback_invalid' %}
+      <div id='support-header'>
+        <div class='wrapper'>
+          <h2>{{system.snippets.support_center}}</h2>
+          {% if page != 'page_index' and page != 'myportal_index' and page != 'myportal_show' and page != 'myaccount' %}
+            {{ search_form_begin }}
+              <div>
+                <input id='q' maxlength='100' name='q' type='text' value='{{ search_term }}' />
+                {{template_form_params}}
+                <div id='question-mask' class='question-small'>{{system.snippets.enter_search_term}}</div>
+                <input id='support-search-submit' type='submit' value='{{system.snippets.search}}' />
+              </div>
+            {{ search_form_end }}
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+      <div class='wrapper'>
+
+<!-- MAIN BLOCK - Replaces Desk:Body in local dev -->
+{% block main %}
+{% endblock %}
+<!-- MAIN BLOCK - Replaces Desk:Body in local dev -->
+
+{% if page != 'customer_feedback' and page != 'customer_feedback_completed' and page != 'customer_feedback_invalid' %}
+  <div id='support-side'>
+    <div class='content'>
+      <h3>{{system.snippets.contact_us}}</h3>
+      <ul>
+        {% if portal.questions_enabled %}
+          <li>
+            <a href='{{desk.system.links.question}}'>{{system.snippets.post_public_question}}</a>
+          </li>
+        {% endif %}
+
+        <!-- GS -->
+        {% if desk.apps.get_satisfaction.enabled %}
+        <li>
+          <a id='gs_link' target='_blank'>{{system.snippets.ask_community}}</a>
+        </li>
+        {% endif %}
+        <!-- GS -->
+
+        {% if site.email_enabled_config %}
+          <li>
+            <a href='{{desk.system.links.email}}'>{{system.snippets.email_us}}</a>
+          </li>
+        {% endif %}
+        {% if site.chat_enabled_config %}
+          <li>
+            <a href='{{desk.system.links.chat}}'>{{system.snippets.live_chat}}</a>
+          </li>
+        {% endif %}
+        {% if site.phone_enabled_config %}
+          <li>
+            {{ desk.page.theme.contact_us_content }}
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <!-- GS -->
+    {% if desk.apps.get_satisfaction.enabled %}
+    <div class='content'>
+      <h3>{{system.snippets.recent_discussions}}</h3>
+      <div id='gs_Sidebar_Results'>
+        <img alt='Ajax-loader-small' id='question_submit_spinner' src='{{ "/images/ajax-loader-small.gif" | portal_image_url: image_asset_host }}' style='display:block;margin:auto;' />
+      </div>
+      {{gs_recent_activity_scripting}}
+    </div>
+    {% endif %}
+    <!-- GS -->
+  </div>
+  {% endif %}
+</div>
+</div>
+
+
+
+<!-- Facebook Like Button -->
+<div id="fb-root"></div>
+
+<!-- External Variables for Portal Header -->
+<div id="desk-external-variables-header" class="desk-external-variables">
+ <div id="read_only">{{read_only}}</div>
+  <div id="site-default_mailbox">{{site.default_mailbox}}</div>
+<div id="desk_javascript_host">{{desk_javascript_host}}</div>
+<div id="twitter_enabled">{{desk.apps.twitter.enabled}}</div>
+<div id="twitter_username">{{desk.apps.twitter.username}}</div>
+<div id="system-snippets-loading">{{system.snippets.loading}}</div>
+<div id="system-snippets-seconds_ago">{{system.snippets.seconds_ago}}</div>
+<div id="system-snippets-a_minute_ago">{{system.snippets.a_minute_ago}}</div>
+<div id="system-snippets-minutes_ago">{{system.snippets.minutes_ago}}</div>
+<div id="system-snippets-an_hour_ago">{{system.snippets.an_hour_ago}}</div>
+<div id="system-snippets-hours_ago">{{system.snippets.hours_ago}}</div>
+<div id="system-snippets-a_day_ago">{{system.snippets.a_day_ago}}</div>
+<div id="system-snippets-days_ago">{{system.snippets.days_ago}}</div>
+<div id="system-snippets-about">{{system.snippets.about}}</div>
+<div id="enable_gs">{{desk.apps.get_satisfaction.enabled}}</div>
+<div id="system-snippets-invalid_characters_found">{{system.snippets.invalid_characters_found}}</div>
+<div id="site-search_autocomplete_articles_url">{{site.search_autocomplete_articles_url}}</div>
+<div id="search-term">{{search_term}}</div>
+{% if desk.apps.get_satisfaction.enabled %}
+  <div id="system-snippets-get_satisfaction_error">{{system.snippets.get_satisfaction_error}}</div>
+  <div id="system-snippets-view_all">{{system.snippets.view_all}}</div>
+  <div id="system-snippets-no_related_discussions">{{system.snippets.no_related_discussions}}</div>
+  <div id="system-snippets-related_discussions">{{system.snippets.related_discussions}}</div>
+  <div id="zero0">{{0}}</div>
+  <div id="system-snippets-discussions">{{system.snippets.discussions}}</div>
+  <div id="system-snippets-replies">{{system.snippets.replies}}</div>
+  <div id="system-snippets-questions">{{system.snippets.questions}}</div>
+  <div id="system-snippets-ideas">{{system.snippets.ideas}}</div>
+  <div id="system-snippets-problems">{{system.snippets.problems}}</div>
+  <div id="system-snippets-praise">{{system.snippets.praise}}</div>
+{% endif %}
+</div>
+
+
+  <!-- build:js scripts/vendor.js -->
+  <!-- bower:js -->
+  <!-- endbower -->
+  <!-- endbuild -->
+  <% if (startingPoint == 'bootStrap' || startingPoint == 'bootStrapFour') { %>
+  <!-- build:js scripts/plugins.js -->
+  <% bsPlugins.forEach(function (plugin) { -%>
+  <script src="<%= bsPath + plugin %>.js"></script>
+  <% }) -%>
+  <!-- endbuild -->
+  <% } %>
+  <script type="text/javascript" src="{{desk_javascript_host}}portal/desk.portal.shared.js"></script>
+  <script type="text/javascript" src="{{desk_javascript_host}}portal/desk.portal.header.js"></script>
+  <script type="text/javascript" src="{{desk_javascript_host}}portal/desk.portal.body.layout_footer.js"></script>
+  <!-- build:js scripts/main.js -->
+  <script src="scripts/main.js"></script>
+  <!-- endbuild -->
+
+
+  </body>
+</html>

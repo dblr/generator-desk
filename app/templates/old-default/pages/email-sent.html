@@ -1,0 +1,42 @@
+<!-- build:email_submitted -->
+{% extends "../_layout.html" %}
+{% assign page = 'email_submitted' %}
+{% block main %}
+<!-- endbuild -->
+
+
+<div id='breadcrumbs'>
+  <a href='{{desk.system.links.home}}'>{{system.snippets.home}}</a> &rsaquo; {{system.snippets.email_us}}
+</div>
+<div id='support-main'>
+  <div class='support-body'>
+    <div class='content'>
+      <h3>{{system.snippets.email_us}}</h3>
+      <h4>{{system.snippets.email_success}}</h4>
+    </div>
+  </div>
+  <!--
+  ***************
+  The following attribution needs to remain as is in terms of wording with the appropriate link back to desk.com as per our terms of service: http://www.desk.com/terms
+  If you would like, you may change the location or the styling to better match your site, but the content and the link must remain in the template and visible to end users.
+  ****************
+  -->
+  <div id='footer'>
+    {{ desk.page.theme.footer_content }}
+    {% if site.seo_footer %}
+      <div class="powered_by_desk powered_by_desk_v2">Powered By
+        <a class="powered_by_logo powered_by_logo_v2" href="http://www.desk.com">
+          <div>Desk.com</div><div> Customer Service and Helpdesk Ticket Software</div></a>
+      </div>
+    {% else %}
+      <div class="powered_by_desk">
+        <a href='http://www.desk.com'><div class="powered_by_logo"></div></a>
+        Powered by &nbsp;Desk.com
+      </div>
+    {% endif %}
+  </div>
+</div>
+    
+<!-- build:endblock -->
+{% endblock %}
+<!-- endbuild -->

@@ -1,0 +1,85 @@
+<!-- build:myportal_index -->
+{% extends "../_layout.html" %}
+{% assign page = 'myportal_index' %}
+{% assign desk.page.content.form = "<form accept-charset='UTF-8' action='/customer/registrations' method='post' novalidate='novalidate'><div style='margin:0;padding:0;display:inline'><input name='utf8' type='hidden' value='✓'><input name='authenticity_token' type='hidden' value='INY+d0Nc5eu0DcqQ7aLr3wmShSotRr4twIgCKCBWrbk='></div> <div class='field'> <label for='email'>Email</label> <input id='email' maxlength='50' name='email' type='text' class='invalid'><label for='email' generated='true' class='invalid'>Email address is required.</label> </div> <div class='input-button actions'><input id='registration_submit' name='commit' type='submit' value='Send Instructions'></div> </form>" %}
+{% block main %}
+<!-- endbuild -->
+
+
+
+<div id='breadcrumbs'>
+  <a href='{{desk.system.links.home}}'>{{desk.system.snippets.home}}</a> &rsaquo; {{desk.system.snippets.my_cases}}
+</div>
+<div id='support-main'>
+
+    <div id="registration-in-progress">
+        <img alt='Ajax-loader-small' src='{{ "/images/ajax-loader-small.gif" | portal_image_url: image_asset_host }}' />
+        {{desk.system.snippets.registration_in_progress}}
+    </div>
+
+  <div class='myportal' id="mycases">
+    <div class='mycases-filters'>
+      <div class='a-selectbox'>
+            <select id="a-cases-filter">
+              <option value="my">{{desk.system.snippets.show_my_cases}}</option>
+              {% if desk.customer.can_access_company_tickets? %}
+              <option value="company" selected="selected">{{desk.system.snippets.show_all_cases}}</option>
+              {% endif %}
+              <option value="7">{{desk.system.snippets.show_last_num_days | format_snippet: '"num":"7"' }}</option>
+              <option value="30">{{desk.system.snippets.show_last_num_days | format_snippet: '"num":"30"' }}</option>
+            </select>
+          </div>
+          <div class='a-checkbox'>
+        <input id="a-active-only" type="checkbox">{{desk.system.snippets.active_only}}</input>
+      </div>
+      <a href='{{desk.system.links.email}}' class='myportal-button'>{{desk.system.snippets.create_new_case}}</a>
+    </div>
+    <table class='mycases'>
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{desk.system.snippets.case_id}}</th>
+          <th>{{desk.system.snippets.subject}}</th>
+          {% if desk.customer.can_access_company_tickets? %}<th>{{desk.system.snippets.from}}</th>{% endif %}
+          <th>{{desk.system.snippets.updated}}</th>
+          <th>{{desk.system.snippets.status}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for case in desk.page.content.cases %}
+        <tr>
+          <td class='a-casechannel'><img src='{{ case.channel_icon }}'/></td>
+          <td class='a-caseid'>{{ case.id }}</td>
+          <td class='a-casesubject'><a href="{{ case.portal_url }}">{{ case.subject }}</a></td>
+          {% if desk.customer.can_access_company_tickets? %}<td class='a-casefrom'>{{case.customer.first_name}}</td>{% endif %}
+          <td class='a-casecreated'>{{ case.updated_at | in_time_zone: site.timezone | date: '%b %d' }}</td>
+          <td class='a-casestatus'>{% case case.status.id %}
+            {% when 10 %}
+              {{desk.system.snippets.case_new}}
+            {% when 30 %}
+              {{desk.system.snippets.case_open}}
+            {% when 50 %}
+              {{desk.system.snippets.case_pending}}
+            {% when 70 %}
+              {{desk.system.snippets.case_resolved}}
+            {% when 90 %}
+              {{desk.system.snippets.case_closed}}
+            {% endcase %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div id='pagination'>
+      {{ desk.page.content.more_cases_block }}
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="{{desk_javascript_host}}portal/desk.portal.body.myportal_index.js"></script>
+
+
+
+
+<!-- build:endblock -->
+{% endblock %}
+<!-- endbuild -->

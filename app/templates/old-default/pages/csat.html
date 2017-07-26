@@ -1,0 +1,91 @@
+<!-- build:customer_feedback -->
+{% extends "../_layout.html" %}
+{% assign page = 'customer_feedback' %}
+{% assign customer_feedback.feedback_enabled = true %}
+{% assign customer_feedback = 'test' %}
+{% assign form = true %}
+{% block main %}
+<!-- endbuild -->
+
+
+
+<div id="desk-external-variables-customer-feedback" class="desk-external-variables">
+</div>
+<div id='support-main' class='main-customer-feedback'>
+  <div class='support-body'>
+    <div class='content'>
+      <h3>{{desk.system.snippets.customer_feedback_title}}</h3>
+      {% if customer_feedback.feedback_enabled? %}
+        {% if customer_feedback.expired? %}
+           <div class="customer-feedback-expired">
+               <h4>{{system.snippets.customer_feedback_expired}}</h4>
+           </div>
+        {% else %}
+            <div class='customer-feedback-case'>
+                <h4>{{desk.system.snippets.customer_feedback_case}} {{desk.system.snippets.case_id}}: {{ticket.id}}!</h4>
+            </div>
+
+            <div id="form">
+            {% form customer_feedback %}
+              <div class='input-block'>
+                <span class='label'>{{customer_feedback.question}}</span>
+                <div class='input-radio-group'>
+                  <input id="customer-feedback-checked-rating" type="hidden" name="checked_rating" value="{{customer_feedback.rating}}">
+                  {% if customer_feedback.yes_no_rating? %}
+                      <input id="customer-feedback-rating0" name="customer_feedback[rating]" type="radio" value="0">
+                      <img class="radio-label-rating-type"
+                             src='{{ "/images/rating_type100_0.png" | portal_image_url: image_asset_host }}'>
+                      <input id="customer-feedback-rating1" name="customer_feedback[rating]" type="radio" value="3">
+                      <img class="radio-label-rating-type"
+                             src='{{ "/images/rating_type100_3.png" | portal_image_url: image_asset_host }}'>
+                  {% else %}
+                    <input id="customer-feedback-rating0" name="customer_feedback[rating]" type="radio" value="0">
+                      <img class="radio-label-rating-type"
+                             src='{{ "/images/rating_type200_0.png" | portal_image_url: image_asset_host }}'>
+
+                    <input id="customer-feedback-rating1" name="customer_feedback[rating]" type="radio" value="1">
+                      <img class="radio-label-rating-type"
+                             src='{{ "/images/rating_type200_1.png" | portal_image_url: image_asset_host }}'>
+
+                    <input id="customer-feedback-rating2" name="customer_feedback[rating]" type="radio" value="2">
+                      <img class="radio-label-rating-type"
+                             src='{{ "/images/rating_type200_2.png" | portal_image_url: image_asset_host }}'>
+
+                    <input id="customer-feedback-rating3" name="customer_feedback[rating]" type="radio" value="3">
+                      <img class="radio-label-rating-type"
+                             src='{{ "/images/rating_type200_3.png" | portal_image_url: image_asset_host }}'>
+
+                  {% endif %}
+                </div>
+              </div>
+
+              {% if customer_feedback.additional_feedback_enabled? %}
+              <div class='input-block'>
+                <span class='label'>{{customer_feedback.additional_question}}</span>
+                <div>
+                  <textarea name='customer_feedback[additional_feedback]' maxlength="1024">{{customer_feedback.additional_feedback}}</textarea>
+                </div>
+              </div>
+              {% endif %}
+              <div class='input-button'>
+                <input id='customer-feedback-submit' name='commit' type='submit' value='{{desk.system.snippets.customer_feedback_submit}}' />
+              </div>
+            {% endform %}
+            </div>
+        {% endif %}
+      {% else %}
+        <div class='customer-feedback-disabled'>
+          {{system.snippets.customer_feedback_disabled}}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="{{desk_javascript_host}}portal/desk.portal.body.customer_feedback.js"></script>
+
+
+
+<!-- build:endblock -->
+{% endblock %}
+<!-- endbuild -->
